@@ -1,7 +1,7 @@
 // Location: repositories/scorecard.repository.js
 
 const BaseRepository = require('./base.repository');
-const { db } = require('../databaseManagement');
+const { db } = require('../database/databaseManagement');
 
 // Repository for Scorecard operations
 class ScorecardRepository extends BaseRepository {
@@ -10,8 +10,8 @@ class ScorecardRepository extends BaseRepository {
   }
 
   addScorecard(scorecard, callback) {
-    const columns = ['player_name', 'golf_course', 'game_type', 'scores'];
-    const data = [scorecard.player_name, scorecard.golf_course, scorecard.game_type, JSON.stringify(scorecard.scores)];
+    const columns = ['playerId', 'golf_course', 'game_type', 'scores']; // Updated column name to player_id
+    const data = [scorecard.playerId, scorecard.golf_course, scorecard.game_type, JSON.stringify(scorecard.scores)];
     super.add(data, columns, callback);
   }
 
@@ -24,8 +24,8 @@ class ScorecardRepository extends BaseRepository {
   }
 
   updateScorecard(id, scorecard, callback) {
-    const columns = ['player_name', 'golf_course', 'game_type', 'scores'];
-    const data = [scorecard.player_name, scorecard.golf_course, scorecard.game_type, JSON.stringify(scorecard.scores)];
+    const columns = ['playerId', 'golf_course', 'game_type', 'scores']; // Updated column name to player_id
+    const data = [scorecard.playerId, scorecard.golf_course, scorecard.game_type, JSON.stringify(scorecard.scores)];
     super.update(id, data, columns, callback);
   }
 
