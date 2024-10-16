@@ -3,14 +3,15 @@
 const express = require('express');
 const router = express.Router();
 const GolfCourseService = require('../services/golfcourse.service');
+const { sendResponse } = require('./utils/responseUtil');
 
 // Add a new golf course
 router.post('/', (req, res) => {
-  GolfCourseService.addGolfCourse(req.body, (err, id) => {
+  GolfCourseService.addGolfCourse(req.body, (err, result) => {
     if (err) {
-      res.status(500).send({ error: 'Failed to add golf course' });
+      sendResponse(res, 500, 'Failed to add golf course', null, err.message);
     } else {
-      res.status(201).send({ id });
+      sendResponse(res, 201, 'Golf course added successfully', { id: result.id });
     }
   });
 });
@@ -19,9 +20,9 @@ router.post('/', (req, res) => {
 router.get('/', (req, res) => {
   GolfCourseService.getAllGolfCourses((err, golfCourses) => {
     if (err) {
-      res.status(500).send({ error: 'Failed to retrieve golf courses' });
+      sendResponse(res, 500, 'Failed to retrieve golf courses', null, err.message);
     } else {
-      res.send(golfCourses);
+      sendResponse(res, 200, 'Golf courses retrieved successfully', golfCourses);
     }
   });
 });
@@ -30,9 +31,11 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   GolfCourseService.getGolfCourseById(req.params.id, (err, golfCourse) => {
     if (err) {
-      res.status(500).send({ error: 'Failed to retrieve golf course' });
+      sendResponse(res, 500, 'Failed to retrieve golf course', null, err.message);
+    } else if (!golfCourse) {
+      sendResponse(res, 404, `Golf course with ID ${req.params.id} not found`);
     } else {
-      res.send(golfCourse);
+      sendResponse(res, 200, 'Golf course retrieved successfully', golfCourse);
     }
   });
 });
@@ -41,9 +44,11 @@ router.get('/:id', (req, res) => {
 router.put('/:id', (req, res) => {
   GolfCourseService.updateGolfCourse(req.params.id, req.body, (err, changes) => {
     if (err) {
-      res.status(500).send({ error: 'Failed to update golf course' });
+      sendResponse(res, 500, 'Failed to update golf course', null, err.message);
+    } else if (changes === 0) {
+      sendResponse(res, 404, `Golf course with ID ${req.params.id} not found`);
     } else {
-      res.send({ changes });
+      sendResponse(res, 200, 'Golf course updated successfully', changes);
     }
   });
 });
@@ -52,9 +57,11 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   GolfCourseService.deleteGolfCourse(req.params.id, (err, changes) => {
     if (err) {
-      res.status(500).send({ error: 'Failed to delete golf course' });
+      sendResponse(res, 500, 'Failed to delete golf course', null, err.message);
+    } else if (changes === 0) {
+      sendResponse(res, 404, `Golf course with ID ${req.params.id} not found`);
     } else {
-      res.send({ changes });
+      sendResponse(res, 200, 'Golf course deleted successfully', changes);
     }
   });
 });

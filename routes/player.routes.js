@@ -3,14 +3,15 @@
 const express = require('express');
 const router = express.Router();
 const PlayerService = require('../services/player.service');
+const { sendResponse } = require('./utils/responseUtil');
 
 // Add a new player
 router.post('/', (req, res) => {
   PlayerService.addPlayer(req.body, (err, id) => {
     if (err) {
-      res.status(500).send({ error: 'Failed to add player' });
+      sendResponse(res, 500, 'Failed to add player', null, err.message);
     } else {
-      res.status(201).send({ id });
+      sendResponse(res, 201, 'Player added successfully', { id });
     }
   });
 });
@@ -19,9 +20,9 @@ router.post('/', (req, res) => {
 router.get('/', (req, res) => {
   PlayerService.getAllPlayers((err, players) => {
     if (err) {
-      res.status(500).send({ error: 'Failed to retrieve players' });
+      sendResponse(res, 500, 'Failed to retrieve players', null, err.message);
     } else {
-      res.send(players);
+      sendResponse(res, 200, 'Players retrieved successfully', players);
     }
   });
 });
@@ -30,9 +31,11 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   PlayerService.getPlayerById(req.params.id, (err, player) => {
     if (err) {
-      res.status(500).send({ error: 'Failed to retrieve player' });
+      sendResponse(res, 500, 'Failed to retrieve player', null, err.message);
+    } else if (!player) {
+      sendResponse(res, 404, `Player with ID ${req.params.id} not found`);
     } else {
-      res.send(player);
+      sendResponse(res, 200, 'Player retrieved successfully', player);
     }
   });
 });
@@ -41,9 +44,11 @@ router.get('/:id', (req, res) => {
 router.put('/:id', (req, res) => {
   PlayerService.updatePlayer(req.params.id, req.body, (err, changes) => {
     if (err) {
-      res.status(500).send({ error: 'Failed to update player' });
+      sendResponse(res, 500, 'Failed to update player', null, err.message);
+    } else if (changes === 0) {
+      sendResponse(res, 404, `Player with ID ${req.params.id} not found`);
     } else {
-      res.send({ changes });
+      sendResponse(res, 200, 'Player updated successfully', changes);
     }
   });
 });
@@ -52,9 +57,11 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
   PlayerService.deletePlayer(req.params.id, (err, changes) => {
     if (err) {
-      res.status(500).send({ error: 'Failed to delete player' });
+      sendResponse(res, 500, 'Failed to delete player', null, err.message);
+    } else if (changes === 0) {
+      sendResponse(res, 404, `Player with ID ${req.params.id} not found`);
     } else {
-      res.send({ changes });
+      sendResponse(res, 200, 'Player deleted successfully', changes);
     }
   });
 });

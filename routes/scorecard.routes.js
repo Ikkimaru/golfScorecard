@@ -3,14 +3,16 @@
 const express = require('express');
 const router = express.Router();
 const ScorecardService = require('../services/scorecard.service');
+const { sendResponse } = require('./utils/responseUtil');
 
 // Create - Add a new scorecard
 router.post('/', (req, res) => {
   ScorecardService.addScorecard(req.body, (err, id) => {
     if (err) {
-      return res.status(400).json({ error: err.message });
+      sendResponse(res, 400, 'Failed to add scorecard', null, err.message);
+    } else {
+      sendResponse(res, 201, 'Scorecard added successfully', { id });
     }
-    res.status(201).json({ id });
   });
 });
 
@@ -18,9 +20,10 @@ router.post('/', (req, res) => {
 router.get('/', (req, res) => {
   ScorecardService.getAllScorecards((err, rows) => {
     if (err) {
-      return res.status(500).json({ error: err.message });
+      sendResponse(res, 500, 'Failed to retrieve scorecards', null, err.message);
+    } else {
+      sendResponse(res, 200, 'Scorecards retrieved successfully', rows);
     }
-    res.status(200).json(rows);
   });
 });
 
@@ -29,12 +32,12 @@ router.get('/:id', (req, res) => {
   const { id } = req.params;
   ScorecardService.getScorecardById(id, (err, row) => {
     if (err) {
-      return res.status(500).json({ error: err.message });
+      sendResponse(res, 500, 'Failed to retrieve scorecard', null, err.message);
+    } else if (!row) {
+      sendResponse(res, 404, `Scorecard with ID ${id} not found`);
+    } else {
+      sendResponse(res, 200, 'Scorecard retrieved successfully', row);
     }
-    if (!row) {
-      return res.status(404).json({ error: 'Scorecard not found' });
-    }
-    res.status(200).json(row);
   });
 });
 
@@ -43,12 +46,12 @@ router.put('/:id', (req, res) => {
   const { id } = req.params;
   ScorecardService.updateScorecard(id, req.body, (err, changes) => {
     if (err) {
-      return res.status(400).json({ error: err.message });
+      sendResponse(res, 400, 'Failed to update scorecard', null, err.message);
+    } else if (changes === 0) {
+      sendResponse(res, 404, `Scorecard with ID ${id} not found`);
+    } else {
+      sendResponse(res, 200, 'Scorecard updated successfully', changes);
     }
-    if (changes === 0) {
-      return res.status(404).json({ error: 'Scorecard not found' });
-    }
-    res.status(200).json({ message: 'Scorecard updated' });
   });
 });
 
@@ -57,12 +60,12 @@ router.delete('/:id', (req, res) => {
   const { id } = req.params;
   ScorecardService.deleteScorecard(id, (err, changes) => {
     if (err) {
-      return res.status(500).json({ error: err.message });
+      sendResponse(res, 500, 'Failed to delete scorecard', null, err.message);
+    } else if (changes === 0) {
+      sendResponse(res, 404, `Scorecard with ID ${id} not found`);
+    } else {
+      sendResponse(res, 200, 'Scorecard deleted successfully', changes);
     }
-    if (changes === 0) {
-      return res.status(404).json({ error: 'Scorecard not found' });
-    }
-    res.status(200).json({ message: 'Scorecard deleted' });
   });
 });
 
