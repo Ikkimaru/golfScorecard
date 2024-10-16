@@ -49,10 +49,30 @@ function createScorecardTable() {
   });
 }
 
+// Create the 'golfcourse' table if it doesn't exist
+function createGolfCourseTable() {
+  const schema = `
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    courseName TEXT NOT NULL,
+    courseLocation TEXT NOT NULL,
+    coursePar INTEGER NOT NULL,
+    isEighteen BOOLEAN NOT NULL
+  `;
+
+  db.run(`CREATE TABLE IF NOT EXISTS golfcourse (${schema})`, (err) => {
+    if (err) {
+      console.error("Error creating golfcourse table:", err.message);
+    } else {
+      console.log('GolfCourse table is ready.');
+    }
+  });
+}
+
 // Initialize database tables
 function initializeDatabase() {
   createPlayerTable();
   createScorecardTable();
+  createGolfCourseTable();
 }
 
 module.exports = {

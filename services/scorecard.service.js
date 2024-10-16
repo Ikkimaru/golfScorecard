@@ -1,12 +1,12 @@
 // Location: services/scorecard.service.js
 
 const ScorecardRepository = require('../repositories/scorecard.repository');
-const Scorecard = require('../models/scorecard.model'); // Import the Scorecard model
-const ScorecardEntity = require('../database/entities/scorecardEntity'); // Import the Scorecard entities
+const Scorecard = require('../models/scorecard.model');
+const ScorecardEntity = require('../database/entities/scorecardEntity');
 
 class ScorecardService {
   static addScorecard(scorecardData, callback) {
-    const { playerId, golf_course, game_type, scores } = scorecardData; // Extract playerId from the incoming data
+    const { playerId, golf_course, game_type, scores } = scorecardData;
 
     // Validate scores
     if (!Array.isArray(scores)) {
@@ -48,7 +48,7 @@ class ScorecardService {
   }
 
   static updateScorecard(id, scorecardData, callback) {
-    const { playerId, golf_course, game_type, scores } = scorecardData; // Extract playerId from the incoming data
+    const { playerId, golf_course, game_type, scores } = scorecardData;
 
     // Validate scores
     if (!Array.isArray(scores)) {

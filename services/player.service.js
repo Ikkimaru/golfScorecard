@@ -1,13 +1,13 @@
 // Location: services/player.service.js
 
 const PlayerRepository = require('../repositories/player.repository');
-const Player = require('../models/player.model'); // Import the Player model
-const PlayerEntity = require('../database/entities/playerEntity'); // Import the Player entities
+const Player = require('../models/player.model');
+const PlayerEntity = require('../database/entities/playerEntity');
 
 class PlayerService {
   static addPlayer(playerData, callback) {
     const player = new Player(playerData.firstName, playerData.lastName, playerData.currentHandicap);
-    const playerEntities = new PlayerEntity(null, player.firstName, player.lastName, player.currentHandicap); // Pass id as null for new entry
+    const playerEntities = new PlayerEntity(null, player.firstName, player.lastName, player.currentHandicap);
     PlayerRepository.addPlayer(playerEntities, callback);
   }
 
@@ -21,7 +21,7 @@ class PlayerService {
 
   static updatePlayer(id, playerData, callback) {
     const player = new Player(playerData.firstName, playerData.lastName, playerData.currentHandicap);
-    const playerEntities = new PlayerEntity(id, player.firstName, player.lastName, player.currentHandicap); // Pass the id for existing entry
+    const playerEntities = new PlayerEntity(id, player.firstName, player.lastName, player.currentHandicap);
     PlayerRepository.updatePlayer(id, playerEntities, callback);
   }
 
