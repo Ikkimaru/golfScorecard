@@ -10,8 +10,8 @@ class GolfCourseRepository extends BaseRepository {
   }
 
   addGolfCourse(golfCourse, callback) {
-    const columns = ['courseName', 'courseLocation', 'coursePar', 'isEighteen'];
-    const data = [golfCourse.courseName, golfCourse.courseLocation, golfCourse.coursePar, golfCourse.isEighteen];
+    const columns = ['CourseName', 'Location', 'TotalHoles'];
+    const data = [golfCourse.courseName, golfCourse.courseLocation, golfCourse.totalHoles];
     super.add(data, columns, callback);
   }
 
@@ -24,8 +24,8 @@ class GolfCourseRepository extends BaseRepository {
   }
 
   updateGolfCourse(id, golfCourse, callback) {
-    const columns = ['courseName', 'courseLocation', 'coursePar', 'isEighteen'];
-    const data = [golfCourse.courseName, golfCourse.courseLocation, golfCourse.coursePar, golfCourse.isEighteen];
+    const columns = ['CourseName', 'Location', 'TotalHoles'];
+    const data = [golfCourse.courseName, golfCourse.courseLocation, golfCourse.totalHoles];
     super.update(id, data, columns, callback);
   }
 

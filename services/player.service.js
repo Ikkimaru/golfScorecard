@@ -6,16 +6,32 @@ const PlayerEntity = require('../database/entities/playerEntity');
 
 class PlayerService {
   static addPlayer(playerData, callback) {
-    const player = new Player(playerData.firstName, playerData.lastName, playerData.currentHandicap);
-    const playerEntity = new PlayerEntity(null, player.firstName, player.lastName, player.currentHandicap);
-    
-    PlayerRepository.addPlayer(playerEntity, (err, id) => {
-      if (err) {
-        callback(err);
-      } else {
-        callback(null, id);
-      }
-    });
+    try {
+      const player = new Player(
+        null,
+        playerData.firstName,
+        playerData.lastName,
+        playerData.email,
+        playerData.handicapIndex
+      );
+      const playerEntity = new PlayerEntity(
+        null,
+        player.firstName,
+        player.lastName,
+        player.email,
+        player.handicapIndex
+      );
+
+      PlayerRepository.addPlayer(playerEntity, (err, id) => {
+        if (err) {
+          callback(err);
+        } else {
+          callback(null, id);
+        }
+      });
+    } catch (err) {
+      callback(err);
+    }
   }
 
   static getAllPlayers(callback) {
@@ -39,16 +55,32 @@ class PlayerService {
   }
 
   static updatePlayer(id, playerData, callback) {
-    const player = new Player(playerData.firstName, playerData.lastName, playerData.currentHandicap);
-    const playerEntity = new PlayerEntity(id, player.firstName, player.lastName, player.currentHandicap);
-    
-    PlayerRepository.updatePlayer(id, playerEntity, (err, changes) => {
-      if (err) {
-        callback(err);
-      } else {
-        callback(null, changes);
-      }
-    });
+    try {
+      const player = new Player(
+        id,
+        playerData.firstName,
+        playerData.lastName,
+        playerData.email,
+        playerData.handicapIndex
+      );
+      const playerEntity = new PlayerEntity(
+        id,
+        player.firstName,
+        player.lastName,
+        player.email,
+        player.handicapIndex
+      );
+
+      PlayerRepository.updatePlayer(id, playerEntity, (err, changes) => {
+        if (err) {
+          callback(err);
+        } else {
+          callback(null, changes);
+        }
+      });
+    } catch (err) {
+      callback(err);
+    }
   }
 
   static deletePlayer(id, callback) {

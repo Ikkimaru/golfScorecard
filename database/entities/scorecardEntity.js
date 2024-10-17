@@ -1,14 +1,18 @@
 // Location: database/entities/scorecardEntity.js
 
 class ScorecardEntity {
-  constructor(id, playerId, golf_course, game_type, scores) {
-      this.id = id; // Unique identifier for each scorecard
-      this.playerId = playerId; // Foreign key for the player
-      this.golf_course = golf_course; // Name of the golf course
-      this.game_type = game_type; // Type of game (9-hole or 18-hole)
-      this.scores = scores; // Array of scores for the holes
+  constructor(id, playerId, golfCourseId, teeBoxId, weatherId, gameDate, totalScore, handicapIndex, courseHandicap, playingHandicap, scores) {
+    this.id = id; // Unique identifier for each scorecard
+    this.playerId = playerId; // Foreign key for the player
+    this.golfCourseId = golfCourseId; // Foreign key for the golf course
+    this.teeBoxId = teeBoxId; // Foreign key for the tee box
+    this.weatherId = weatherId; // Foreign key for the weather conditions
+    this.gameDate = gameDate; // Date of the game
+    this.totalScore = totalScore; // Total score for the game
+    this.handicapIndex = handicapIndex; // Player's handicap index
+    this.courseHandicap = courseHandicap; // Course handicap
+    this.playingHandicap = playingHandicap; // Playing handicap
   }
 }
 
 module.exports = ScorecardEntity;
-  

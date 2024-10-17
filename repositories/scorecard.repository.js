@@ -10,8 +10,8 @@ class ScorecardRepository extends BaseRepository {
   }
 
   addScorecard(scorecard, callback) {
-    const columns = ['playerId', 'golf_course', 'game_type', 'scores']; // Updated column name to player_id
-    const data = [scorecard.playerId, scorecard.golf_course, scorecard.game_type, JSON.stringify(scorecard.scores)];
+    const columns = ['playerId', 'golfCourseId', 'teeBoxId', 'weatherId', 'gameDate', 'totalScore', 'handicapIndex', 'courseHandicap', 'playingHandicap'];
+    const data = [scorecard.playerId, scorecard.golfCourseId, scorecard.teeBoxId, scorecard.weatherId, scorecard.gameDate, scorecard.totalScore, scorecard.handicapIndex, scorecard.courseHandicap, scorecard.playingHandicap];
     super.add(data, columns, callback);
   }
 
@@ -24,8 +24,8 @@ class ScorecardRepository extends BaseRepository {
   }
 
   updateScorecard(id, scorecard, callback) {
-    const columns = ['playerId', 'golf_course', 'game_type', 'scores']; // Updated column name to player_id
-    const data = [scorecard.playerId, scorecard.golf_course, scorecard.game_type, JSON.stringify(scorecard.scores)];
+    const columns = ['playerId', 'golfCourseId', 'teeBoxId', 'weatherId', 'gameDate', 'totalScore', 'handicapIndex', 'courseHandicap', 'playingHandicap'];
+    const data = [scorecard.playerId, scorecard.golfCourseId, scorecard.teeBoxId, scorecard.weatherId, scorecard.gameDate, scorecard.totalScore, scorecard.handicapIndex, scorecard.courseHandicap, scorecard.playingHandicap];
     super.update(id, data, columns, callback);
   }
 

@@ -10,8 +10,8 @@ class PlayerRepository extends BaseRepository {
   }
 
   addPlayer(player, callback) {
-    const columns = ['firstName', 'lastName', 'currentHandicap'];
-    const data = [player.firstName, player.lastName, player.currentHandicap];
+    const columns = ['firstName', 'lastName', 'email', 'handicapIndex'];
+    const data = [player.firstName, player.lastName, player.email, player.handicapIndex];
     super.add(data, columns, callback);
   }
 
@@ -24,8 +24,8 @@ class PlayerRepository extends BaseRepository {
   }
 
   updatePlayer(id, player, callback) {
-    const columns = ['firstName', 'lastName', 'currentHandicap'];
-    const data = [player.firstName, player.lastName, player.currentHandicap];
+    const columns = ['firstName', 'lastName', 'email', 'handicapIndex'];
+    const data = [player.firstName, player.lastName, player.email, player.handicapIndex];
     super.update(id, data, columns, callback);
   }
 

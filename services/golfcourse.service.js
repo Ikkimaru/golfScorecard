@@ -8,17 +8,16 @@ class GolfCourseService {
   static addGolfCourse(golfCourseData, callback) {
     try {
       const golfCourse = new GolfCourse(
+        null,
         golfCourseData.courseName,
         golfCourseData.courseLocation,
-        golfCourseData.coursePar,
-        golfCourseData.isEighteen
+        golfCourseData.totalHoles
       );
       const golfCourseEntity = new GolfCourseEntity(
         null,
         golfCourse.courseName,
         golfCourse.courseLocation,
-        golfCourse.coursePar,
-        golfCourse.isEighteen
+        golfCourse.totalHoles
       );
       GolfCourseRepository.addGolfCourse(golfCourseEntity, (err, id) => {
         if (err) {
@@ -56,18 +55,11 @@ class GolfCourseService {
 
   static updateGolfCourse(id, golfCourseData, callback) {
     try {
-      const golfCourse = new GolfCourse(
-        golfCourseData.courseName,
-        golfCourseData.courseLocation,
-        golfCourseData.coursePar,
-        golfCourseData.isEighteen
-      );
       const golfCourseEntity = new GolfCourseEntity(
         id,
-        golfCourse.courseName,
-        golfCourse.courseLocation,
-        golfCourse.coursePar,
-        golfCourse.isEighteen
+        golfCourseData.courseName,
+        golfCourseData.courseLocation,
+        golfCourseData.totalHoles
       );
       GolfCourseRepository.updateGolfCourse(id, golfCourseEntity, (err, changes) => {
         if (err) {

@@ -1,93 +1,114 @@
 // Location: services/scorecard.service.js
 
 const ScorecardRepository = require('../repositories/scorecard.repository');
+const Scorecard = require('../models/scorecard.model');
 const ScorecardEntity = require('../database/entities/scorecardEntity');
 
 class ScorecardService {
   static addScorecard(scorecardData, callback) {
     try {
-      const { playerId, golf_course, game_type, scores } = scorecardData;
+      const scorecard = new Scorecard(
+        null,
+        scorecardData.playerId,
+        scorecardData.golfCourseId,
+        scorecardData.teeBoxId,
+        scorecardData.weatherId,
+        scorecardData.gameDate,
+        scorecardData.totalScore,
+        scorecardData.handicapIndex,
+        scorecardData.courseHandicap,
+        scorecardData.playingHandicap
+      );
 
-      // Validate scores
-      if (!Array.isArray(scores) || scores.some(score => typeof score !== 'number')) {
-        throw new Error('Scores must be an array of integers.');
-      }
+      const scorecardEntity = new ScorecardEntity(
+        null,
+        scorecard.playerId,
+        scorecard.golfCourseId,
+        scorecard.teeBoxId,
+        scorecard.weatherId,
+        scorecard.gameDate,
+        scorecard.totalScore,
+        scorecard.handicapIndex,
+        scorecard.courseHandicap,
+        scorecard.playingHandicap
+      );
 
-      const maxHoles = game_type === '9-hole' ? 9 : 18;
-      if (scores.length !== maxHoles) {
-        throw new Error(`For a ${game_type}, you must provide ${maxHoles} scores.`);
-      }
-
-      // Create ScorecardEntity instance
-      const scorecardEntity = new ScorecardEntity(null, playerId, golf_course, game_type, scores);
       ScorecardRepository.addScorecard(scorecardEntity, (err, id) => {
         if (err) {
-          callback(err, null);
+          callback(err);
         } else {
-          callback(null, { id });
+          callback(null, id);
         }
       });
     } catch (err) {
-      callback(err, null);
+      callback(err);
     }
   }
 
   static getAllScorecards(callback) {
-    ScorecardRepository.getAllScorecards((err, rows) => {
+    ScorecardRepository.getAllScorecards((err, scorecards) => {
       if (err) {
-        callback(err, null);
+        callback(err);
       } else {
-        rows.forEach(row => row.scores = JSON.parse(row.scores)); // Convert scores back to array
-        callback(null, rows);
+        callback(null, scorecards);
       }
     });
   }
 
   static getScorecardById(id, callback) {
-    ScorecardRepository.getScorecardById(id, (err, row) => {
+    ScorecardRepository.getScorecardById(id, (err, scorecard) => {
       if (err) {
-        callback(err, null);
-      } else if (!row) {
-        callback(new Error(`Scorecard with ID ${id} not found`), null);
+        callback(err);
       } else {
-        row.scores = JSON.parse(row.scores); // Convert scores back to array
-        callback(null, row);
+        callback(null, scorecard);
       }
     });
   }
 
   static updateScorecard(id, scorecardData, callback) {
     try {
-      const { playerId, golf_course, game_type, scores } = scorecardData;
+      const scorecard = new Scorecard(
+        id,
+        scorecardData.playerId,
+        scorecardData.golfCourseId,
+        scorecardData.teeBoxId,
+        scorecardData.weatherId,
+        scorecardData.gameDate,
+        scorecardData.totalScore,
+        scorecardData.handicapIndex,
+        scorecardData.courseHandicap,
+        scorecardData.playingHandicap
+      );
 
-      // Validate scores
-      if (!Array.isArray(scores) || scores.some(score => typeof score !== 'number')) {
-        throw new Error('Scores must be an array of integers.');
-      }
+      const scorecardEntity = new ScorecardEntity(
+        id,
+        scorecard.playerId,
+        scorecard.golfCourseId,
+        scorecard.teeBoxId,
+        scorecard.weatherId,
+        scorecard.gameDate,
+        scorecard.totalScore,
+        scorecard.handicapIndex,
+        scorecard.courseHandicap,
+        scorecard.playingHandicap
+      );
 
-      const maxHoles = game_type === '9-hole' ? 9 : 18;
-      if (scores.length !== maxHoles) {
-        throw new Error(`For a ${game_type}, you must provide ${maxHoles} scores.`);
-      }
-
-      // Create ScorecardEntity instance
-      const scorecardEntity = new ScorecardEntity(id, playerId, golf_course, game_type, scores);
       ScorecardRepository.updateScorecard(id, scorecardEntity, (err, changes) => {
         if (err) {
-          callback(err, null);
+          callback(err);
         } else {
           callback(null, changes);
         }
       });
     } catch (err) {
-      callback(err, null);
+      callback(err);
     }
   }
 
   static deleteScorecard(id, callback) {
     ScorecardRepository.deleteScorecard(id, (err, changes) => {
       if (err) {
-        callback(err, null);
+        callback(err);
       } else {
         callback(null, changes);
       }
