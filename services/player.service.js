@@ -1,8 +1,8 @@
 // Location: services/player.service.js
 
-const PlayerRepository = require('../repositories/player.repository');
-const Player = require('../models/player.model');
-const PlayerEntity = require('../database/entities/playerEntity');
+const PlayerRepository = require("../repositories/player.repository");
+const Player = require("../models/player.model");
+const PlayerEntity = require("../database/entities/playerEntity");
 
 class PlayerService {
   static addPlayer(playerData, callback) {

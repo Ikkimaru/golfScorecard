@@ -13,6 +13,7 @@ class HoleService {
         holeData.teeBoxID,
         holeData.holeNumber,
         holeData.par,
+        holeData.handicapStroke,
         holeData.yardage,
         holeData.meters
       );
@@ -22,6 +23,7 @@ class HoleService {
         hole.teeBoxID,
         hole.holeNumber,
         hole.par,
+        hole.handicapStroke,
         hole.yardage,
         hole.meters
       );
@@ -66,6 +68,7 @@ class HoleService {
         holeData.teeBoxID,
         holeData.holeNumber,
         holeData.par,
+        holeData.handicapStroke,
         holeData.yardage,
         holeData.meters
       );
@@ -75,6 +78,7 @@ class HoleService {
         hole.teeBoxID,
         hole.holeNumber,
         hole.par,
+        hole.handicapStroke,
         hole.yardage,
         hole.meters
       );

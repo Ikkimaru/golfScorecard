@@ -10,8 +10,8 @@ class HoleRepository extends BaseRepository {
   }
 
   addHole(hole, callback) {
-    const columns = ['golfCourseID', 'teeBoxID', 'holeNumber', 'par', 'yardage', 'meters'];
-    const data = [hole.golfCourseID, hole.teeBoxID, hole.holeNumber, hole.par, hole.yardage, hole.meters];
+    const columns = ['golfCourseID', 'teeBoxID', 'holeNumber', 'par', 'handicapStroke', 'yardage', 'meters'];
+    const data = [hole.golfCourseID, hole.teeBoxID, hole.holeNumber, hole.par, hole.handicapStroke, hole.yardage, hole.meters];
     super.add(data, columns, callback);
   }
 
@@ -24,8 +24,8 @@ class HoleRepository extends BaseRepository {
   }
 
   updateHole(id, hole, callback) {
-    const columns = ['golfCourseID', 'teeBoxID', 'holeNumber', 'par', 'yardage', 'meters'];
-    const data = [hole.golfCourseID, hole.teeBoxID, hole.holeNumber, hole.par, hole.yardage, hole.meters];
+    const columns = ['golfCourseID', 'teeBoxID', 'holeNumber', 'par', 'handicapStroke', 'yardage', 'meters'];
+    const data = [hole.golfCourseID, hole.teeBoxID, hole.holeNumber, hole.par, hole.handicapStroke, hole.yardage, hole.meters];
     super.update(id, data, columns, callback);
   }
 

@@ -56,6 +56,7 @@ function createHoleTable() {
     TeeBoxID INTEGER NOT NULL,
     HoleNumber INTEGER NOT NULL,
     Par INTEGER NOT NULL,
+    HandicapStroke INTEGER NOT NULL,
     Yardage INTEGER,
     Meters INTEGER,
     FOREIGN KEY (GolfCourseID) REFERENCES GolfCourse(GolfCourseID),
@@ -208,7 +209,7 @@ function initializeDatabase() {
   createHoleTable(); //Done
   createTeeBoxTable(); //Done
   createScorecardTable(); //Done
-  createScoreTable();
+  createScoreTable(); //Done
   createWeatherConditionsTable();
   createAchievementTable();
   createPlayerStatisticsTable();

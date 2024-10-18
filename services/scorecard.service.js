@@ -1,8 +1,8 @@
 // Location: services/scorecard.service.js
 
-const ScorecardRepository = require('../repositories/scorecard.repository');
-const Scorecard = require('../models/scorecard.model');
-const ScorecardEntity = require('../database/entities/scorecardEntity');
+const ScorecardRepository = require("../repositories/scorecard.repository");
+const Scorecard = require("../models/scorecard.model");
+const ScorecardEntity = require("../database/entities/scorecardEntity");
 
 class ScorecardService {
   static addScorecard(scorecardData, callback) {
@@ -93,13 +93,17 @@ class ScorecardService {
         scorecard.playingHandicap
       );
 
-      ScorecardRepository.updateScorecard(id, scorecardEntity, (err, changes) => {
-        if (err) {
-          callback(err);
-        } else {
-          callback(null, changes);
+      ScorecardRepository.updateScorecard(
+        id,
+        scorecardEntity,
+        (err, changes) => {
+          if (err) {
+            callback(err);
+          } else {
+            callback(null, changes);
+          }
         }
-      });
+      );
     } catch (err) {
       callback(err);
     }
