@@ -1,6 +1,8 @@
 // Location: database/entities/scorecardEntity.js
 
-class ScorecardEntity {
+const BaseEntity = require('./baseEntity');
+
+class ScorecardEntity extends BaseEntity {
   constructor(id, playerId, golfCourseId, teeBoxId, weatherId, gameDate, totalScore, handicapIndex, courseHandicap, playingHandicap, scores) {
     this.id = id; // Unique identifier for each scorecard
     this.playerId = playerId; // Foreign key for the player

@@ -1,8 +1,10 @@
 // Location: database/entities/holeEntity.js
 
-class HoleEntity {
-  constructor(holeID, golfCourseID, teeBoxID, holeNumber, par, HandicapStroke, yardage, meters) {
-    this.holeID = holeID; // Unique identifier for each hole (Primary Key)
+const BaseEntity = require('./baseEntity');
+
+class HoleEntity extends BaseEntity {
+  constructor(id, golfCourseID, teeBoxID, holeNumber, par, HandicapStroke, yardage, meters) {
+    super(id); // Call the constructor of BaseEntity
     this.golfCourseID = golfCourseID; // Foreign key referencing GolfCourse
     this.teeBoxID = teeBoxID; // Foreign key referencing TeeBox
     this.holeNumber = holeNumber; // The number of the hole on the course

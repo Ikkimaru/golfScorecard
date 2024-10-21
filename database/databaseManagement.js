@@ -14,7 +14,7 @@ const db = new sqlite3.Database('./database/golfScores.db', (err) => {
 // Create the 'player' table if it doesn't exist
 function createPlayerTable() {
   const schema = `
-    PlayerID INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     FirstName TEXT NOT NULL,
     LastName TEXT NOT NULL,
     Email TEXT NOT NULL,
@@ -33,7 +33,7 @@ function createPlayerTable() {
 // Create the 'golfcourse' table if it doesn't exist
 function createGolfCourseTable() {
   const schema = `
-    GolfCourseID INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     CourseName TEXT NOT NULL,
     Location TEXT NOT NULL,
     TotalHoles INTEGER NOT NULL
@@ -51,7 +51,7 @@ function createGolfCourseTable() {
 // Create the 'hole' table if it doesn't exist
 function createHoleTable() {
   const schema = `
-    HoleID INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     GolfCourseID INTEGER NOT NULL,
     TeeBoxID INTEGER NOT NULL,
     HoleNumber INTEGER NOT NULL,
@@ -59,8 +59,8 @@ function createHoleTable() {
     HandicapStroke INTEGER NOT NULL,
     Yardage INTEGER,
     Meters INTEGER,
-    FOREIGN KEY (GolfCourseID) REFERENCES GolfCourse(GolfCourseID),
-    FOREIGN KEY (TeeBoxID) REFERENCES TeeBox(TeeBoxID)
+    FOREIGN KEY (GolfCourseID) REFERENCES GolfCourse(id),
+    FOREIGN KEY (TeeBoxID) REFERENCES TeeBox(id)
   `;
 
   db.run(`CREATE TABLE IF NOT EXISTS Hole (${schema})`, (err) => {
@@ -75,7 +75,7 @@ function createHoleTable() {
 // Create the 'scorecard' table if it doesn't exist
 function createScorecardTable() {
   const schema = `
-    ScorecardID INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     PlayerID INTEGER NOT NULL,
     GolfCourseID INTEGER NOT NULL,
     TeeBoxID INTEGER NOT NULL,
@@ -85,10 +85,10 @@ function createScorecardTable() {
     HandicapIndex REAL,
     CourseHandicap REAL,
     PlayingHandicap REAL,
-    FOREIGN KEY (PlayerID) REFERENCES Player(PlayerID) ON DELETE CASCADE,
-    FOREIGN KEY (GolfCourseID) REFERENCES GolfCourse(GolfCourseID),
-    FOREIGN KEY (TeeBoxID) REFERENCES TeeBox(TeeBoxID),
-    FOREIGN KEY (WeatherID) REFERENCES WeatherConditions(WeatherID)
+    FOREIGN KEY (PlayerID) REFERENCES Player(id) ON DELETE CASCADE,
+    FOREIGN KEY (GolfCourseID) REFERENCES GolfCourse(id),
+    FOREIGN KEY (TeeBoxID) REFERENCES TeeBox(id),
+    FOREIGN KEY (WeatherID) REFERENCES WeatherConditions(id)
   `;
 
   db.run(`CREATE TABLE IF NOT EXISTS Scorecard (${schema})`, (err) => {
@@ -103,12 +103,12 @@ function createScorecardTable() {
 // Create the 'score' table if it doesn't exist
 function createScoreTable() {
   const schema = `
-    ScoreID INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     ScorecardID INTEGER NOT NULL,
     HoleID INTEGER NOT NULL,
     Strokes INTEGER NOT NULL,
-    FOREIGN KEY (ScorecardID) REFERENCES Scorecard(ScorecardID) ON DELETE CASCADE,
-    FOREIGN KEY (HoleID) REFERENCES Hole(HoleID)
+    FOREIGN KEY (ScorecardID) REFERENCES Scorecard(id) ON DELETE CASCADE,
+    FOREIGN KEY (HoleID) REFERENCES Hole(id)
   `;
 
   db.run(`CREATE TABLE IF NOT EXISTS Score (${schema})`, (err) => {
@@ -123,14 +123,14 @@ function createScoreTable() {
 // Create the 'teeBox' table if it doesn't exist
 function createTeeBoxTable() {
   const schema = `
-    TeeBoxID INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     GolfCourseID INTEGER NOT NULL,
     Color TEXT NOT NULL,
     Yardage INTEGER,
     Meters INTEGER,
     CourseRating REAL,
     CoursePar INTEGER NOT NULL,
-    FOREIGN KEY (GolfCourseID) REFERENCES GolfCourse(GolfCourseID)
+    FOREIGN KEY (GolfCourseID) REFERENCES GolfCourse(id)
   `;
 
   db.run(`CREATE TABLE IF NOT EXISTS TeeBox (${schema})`, (err) => {
@@ -145,12 +145,12 @@ function createTeeBoxTable() {
 // Create the 'weatherConditions' table if it doesn't exist
 function createWeatherConditionsTable() {
   const schema = `
-    WeatherID INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     Temperature REAL,
     WindSpeed REAL,
     WeatherDescription TEXT,
-    ChanceOfPercipitation REAL,
-    PercipitationAmount REAL,
+    ChanceOfPrecipitation REAL,
+    PrecipitationAmount REAL,
     Date DATE NOT NULL
   `;
 
@@ -166,11 +166,11 @@ function createWeatherConditionsTable() {
 // Create the 'achievement' table if it doesn't exist
 function createAchievementTable() {
   const schema = `
-    AchievementID INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     PlayerID INTEGER NOT NULL,
     AchievementDescription TEXT NOT NULL,
     DateAchieved DATE,
-    FOREIGN KEY (PlayerID) REFERENCES Player(PlayerID)
+    FOREIGN KEY (PlayerID) REFERENCES Player(id)
   `;
 
   db.run(`CREATE TABLE IF NOT EXISTS Achievement (${schema})`, (err) => {
@@ -185,12 +185,12 @@ function createAchievementTable() {
 // Create the 'playerStatistics' table if it doesn't exist
 function createPlayerStatisticsTable() {
   const schema = `
-    PlayerStatisticsID INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     PlayerID INTEGER NOT NULL,
     TotalGamesPlayed INTEGER DEFAULT 0,
     AverageScore REAL,
     BestScore INTEGER,
-    FOREIGN KEY (PlayerID) REFERENCES Player(PlayerID)
+    FOREIGN KEY (PlayerID) REFERENCES Player(id)
   `;
 
   db.run(`CREATE TABLE IF NOT EXISTS PlayerStatistics (${schema})`, (err) => {
@@ -204,12 +204,12 @@ function createPlayerStatisticsTable() {
 
 // Initialize database tables
 function initializeDatabase() {
-  createPlayerTable(); //Done
-  createGolfCourseTable(); //Done
-  createHoleTable(); //Done
-  createTeeBoxTable(); //Done
-  createScorecardTable(); //Done
-  createScoreTable(); //Done
+  createPlayerTable();
+  createGolfCourseTable();
+  createHoleTable();
+  createTeeBoxTable();
+  createScorecardTable();
+  createScoreTable();
   createWeatherConditionsTable();
   createAchievementTable();
   createPlayerStatisticsTable();

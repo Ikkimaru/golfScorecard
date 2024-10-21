@@ -1,8 +1,10 @@
 // Location: database/entities/teeBoxEntity.js
 
-class TeeBoxEntity {
-    constructor(teeBoxID, golfCourseID, color, yardage, meters, courseRating, coursePar) {
-      this.teeBoxID = teeBoxID; // Unique identifier for each tee box
+const BaseEntity = require('./baseEntity');
+
+class TeeBoxEntity extends BaseEntity {
+    constructor(id, golfCourseID, color, yardage, meters, courseRating, coursePar) {
+      super(id); // Call the constructor of BaseEntity
       this.golfCourseID = golfCourseID; // ID of the associated golf course
       this.color = color; // Color of the tee box
       this.yardage = yardage; // Yardage for the tee box

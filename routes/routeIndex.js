@@ -7,6 +7,9 @@ const golfCourseRoutes = require('./golfcourse.routes');
 const holeRoutes = require('./hole.routes');
 const teeBoxRoutes = require('./teeBox.routes');
 const scoreRoutes = require('./score.routes');
+const weatherRoutes = require('./weatherConditions.routes');
+const achievementRoutes = require('./achievement.routes');
+const playerstatisticRoutes = require('./playerStatistics.routes');
 
 // Initialize router
 const router = express.Router();
@@ -18,5 +21,8 @@ router.use('/golfcourses', golfCourseRoutes);
 router.use('/holes', holeRoutes);
 router.use('/teeboxes', teeBoxRoutes);
 router.use('/scores', scoreRoutes);
+router.use('/weather', weatherRoutes);
+router.use('/achievements', achievementRoutes);
+router.use('/playerstatistics', playerstatisticRoutes);
 
 module.exports = router;
