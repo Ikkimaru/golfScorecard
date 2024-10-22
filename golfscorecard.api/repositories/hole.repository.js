@@ -6,7 +6,7 @@ const { db } = require('../database/databaseManagement');
 // Repository for Hole operations
 class HoleRepository extends BaseRepository {
   constructor() {
-    super(db, 'hole'); // table name 'hole'
+    super(db, 'Hole');
   }
 
   addHole(hole, callback) {

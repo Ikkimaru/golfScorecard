@@ -6,7 +6,7 @@ const { db } = require('../database/databaseManagement');
 // Repository for GolfCourse operations
 class GolfCourseRepository extends BaseRepository {
   constructor() {
-    super(db, 'golfcourse');
+    super(db, 'GolfCourse');
   }
 
   addGolfCourse(golfCourse, callback) {

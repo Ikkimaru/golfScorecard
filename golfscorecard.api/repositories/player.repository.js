@@ -6,7 +6,7 @@ const { db } = require('../database/databaseManagement');
 // Repository for Player operations
 class PlayerRepository extends BaseRepository {
   constructor() {
-    super(db, 'player');
+    super(db, 'Player');
   }
 
   addPlayer(player, callback) {

@@ -6,7 +6,7 @@ const { db } = require('../database/databaseManagement');
 // Repository for Achievement operations
 class AchievementRepository extends BaseRepository {
   constructor() {
-    super(db, 'achievement'); // Assuming the table name is 'achievement'
+    super(db, 'Achievement');
   }
 
   addAchievement(achievement, callback) {

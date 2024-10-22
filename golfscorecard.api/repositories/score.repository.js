@@ -6,7 +6,7 @@ const { db } = require('../database/databaseManagement');
 // Repository for Score operations
 class ScoreRepository extends BaseRepository {
   constructor() {
-    super(db, 'score'); // Using the 'score' table in the database
+    super(db, 'Score');
   }
 
   addScore(score, callback) {

@@ -6,7 +6,7 @@ const { db } = require('../database/databaseManagement');
 // Repository for TeeBox operations
 class TeeBoxRepository extends BaseRepository {
   constructor() {
-    super(db, 'teeBox');
+    super(db, 'TeeBox');
   }
 
   addTeeBox(teeBox, callback) {

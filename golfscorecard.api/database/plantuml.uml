@@ -1,0 +1,102 @@
+@startuml
+entity Player {
+    + id: INT
+    -- 
+    FirstName: TEXT
+    LastName: TEXT
+    Email: TEXT
+    HandicapIndex: REAL
+}
+
+entity GolfCourse {
+    + id: INT
+    -- 
+    CourseName: TEXT
+    Location: TEXT
+    TotalHoles: INT
+}
+
+entity Hole {
+    + id: INT
+    -- 
+    GolfCourseID: INT
+    TeeBoxID: INT
+    HoleNumber: INT
+    Par: INT
+    Yardage: INT
+    Meters: INT
+}
+
+entity Scorecard {
+    + id: INT
+    -- 
+    PlayerID: INT
+    GolfCourseID: INT
+    TeeBoxID: INT
+    WeatherID: INT
+    GameDate: DATE
+    TotalScore: INT
+    HandicapIndex: REAL
+    CourseHandicap: REAL
+    PlayingHandicap: REAL
+}
+
+entity Score {
+    + id: INT
+    -- 
+    ScorecardID: INT
+    HoleID: INT
+    Strokes: INT
+}
+
+entity TeeBox {
+    + id: INT
+    -- 
+    GolfCourseID: INT
+    Color: TEXT
+    Yardage: INT
+    Meters: INT
+    CourseRating: REAL
+    CoursePar: INT
+}
+
+entity WeatherConditions {
+    + id: INT
+    -- 
+    Temperature: REAL
+    WindSpeed: REAL
+    WeatherDescription: TEXT
+    ChanceOfPrecipitation: REAL
+    PrecipitationAmount: REAL
+    Date: DATE
+}
+
+entity Achievement {
+    + id: INT
+    -- 
+    PlayerID: INT
+    AchievementDescription: TEXT
+    DateAchieved: DATE
+}
+
+entity PlayerStatistics {
+    + id: INT
+    -- 
+    PlayerID: INT
+    TotalGamesPlayed: INT
+    AverageScore: REAL
+    BestScore: INT
+}
+
+Player ||--o{ Scorecard
+GolfCourse ||--o{ Scorecard
+Scorecard ||--o{ Score
+GolfCourse ||--o{ Hole
+Score ||--o{ Hole
+TeeBox ||--o{ Hole
+GolfCourse ||--o{ TeeBox
+TeeBox ||--o{ Scorecard
+Scorecard ||--o{ WeatherConditions
+Player ||--o{ Achievement
+Player ||--o{ PlayerStatistics
+@enduml

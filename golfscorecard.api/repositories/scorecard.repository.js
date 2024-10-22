@@ -6,7 +6,7 @@ const { db } = require('../database/databaseManagement');
 // Repository for Scorecard operations
 class ScorecardRepository extends BaseRepository {
   constructor() {
-    super(db, 'scorecard');
+    super(db, 'Scorecard');
   }
 
   addScorecard(scorecard, callback) {

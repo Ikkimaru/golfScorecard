@@ -6,7 +6,7 @@ const { db } = require('../database/databaseManagement');
 // Repository for WeatherConditions operations
 class WeatherConditionsRepository extends BaseRepository {
   constructor() {
-    super(db, 'weather_conditions'); // Assuming the table name is 'weather_conditions'
+    super(db, 'WeatherConditions');
   }
 
   addWeatherConditions(weatherConditions, callback) {

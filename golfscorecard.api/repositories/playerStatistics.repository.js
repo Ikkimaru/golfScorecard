@@ -6,7 +6,7 @@ const { db } = require('../database/databaseManagement');
 // Repository for PlayerStatistics operations
 class PlayerStatisticsRepository extends BaseRepository {
   constructor() {
-    super(db, 'player_statistics'); // Assuming the table name is 'player_statistics'
+    super(db, 'PlayerStatistics');
   }
 
   addPlayerStatistics(playerStatistics, callback) {
