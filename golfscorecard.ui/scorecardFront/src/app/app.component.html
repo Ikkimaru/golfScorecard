@@ -1,0 +1,12 @@
+<!-- src/app/app.component.html -->
+<div class="hole-container">
+  <div *ngFor="let item of data" class="hole-item">
+    <h1>Course: {{item.GolfCourseID}}</h1>
+    <h3>Hole Number: {{ item.HoleNumber }}</h3>
+    <p>Par: {{ item.Par }}</p>
+    <p>Stroke: {{ item.HandicapStroke }}</p>
+    <small>{{ item.Meters }} meters</small><br>
+    <small>{{ item.Yardage }} yards</small>
+  </div>
+</div>
+

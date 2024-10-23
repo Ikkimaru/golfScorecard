@@ -1,0 +1,20 @@
+/* src/app/app.component.css */
+
+.hole-container {
+  display: grid;
+  /*background-color: red;*/
+  column-gap: 14px;
+  row-gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 175px)); /* Set min and max width */
+  padding: 0;
+  margin: 0 auto; /* Center the container */
+}
+
+.hole-item {
+  background-color: chocolate;
+  color: white;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px; /* Optional: rounded corners */
+}
