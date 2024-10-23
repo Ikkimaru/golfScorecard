@@ -1,5 +1,7 @@
 // Location: app.js
 // node app.js
+// npm test
+// ng serve
 
 const express = require('express');
 const bodyParser = require('body-parser');

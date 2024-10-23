@@ -4,7 +4,7 @@ const { db } = require('../database/databaseManagement'); // Adjust the path as 
 
 const seedScorecards = () => {
   const scorecards = [
-    { playerID: 1, golfCourseID: 1, teeBoxID: 1, weatherID: 1, gameDate: '2023-10-01', totalScore: 85, handicapIndex: 10.5 },
+    { playerID: 1, golfCourseID: 1, teeBoxID: 1, weatherID: 1, gameDate: '2023-10-01', totalScore: 85, handicapIndex: 10.5 }, // Get handicapIndex from playerID, Add CourseHandicap and PlayingHandicap
     { playerID: 2, golfCourseID: 2, teeBoxID: 1, weatherID: 2, gameDate: '2023-10-02', totalScore: 75, handicapIndex: 12.3 },
   ];
 

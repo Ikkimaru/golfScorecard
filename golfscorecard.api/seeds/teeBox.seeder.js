@@ -4,8 +4,8 @@ const { db } = require('../database/databaseManagement'); // Adjust the path as 
 
 const seedTeeBoxes = () => {
   const teeBoxes = [
+    { golfCourseID: 2, color: 'Yellow', yardage: 6419, meters: 5870, courseRating: 71.2, coursePar: 72 },
     { golfCourseID: 1, color: 'Blue', yardage: 400, meters: 365, courseRating: 72.0, coursePar: 72 },
-    { golfCourseID: 2, color: 'White', yardage: 300, meters: 274, courseRating: 68.0, coursePar: 36 },
   ];
 
   const insertTeeBoxQuery = `

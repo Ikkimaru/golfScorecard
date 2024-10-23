@@ -5,8 +5,8 @@ const { db } = require('../database/databaseManagement'); // Adjust the path as 
 const seedGolfCourses = () => {
   const golfCourses = [
     { courseName: 'Sunnydale Golf Course', location: 'California', totalHoles: 18 },
-    { courseName: 'Green Valley Golf Club', location: 'Texas', totalHoles: 9 },
-    { courseName: 'Mountain Ridge Golf Course', location: 'Colorado', totalHoles: 18 },
+    { courseName: 'Green Valley Golf Club', location: 'Texas', totalHoles: 18 },
+    { courseName: 'Mountain Ridge Golf Course', location: 'Colorado', totalHoles: 9 },
   ];
 
   const insertGolfCourseQuery = `
