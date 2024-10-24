@@ -1,19 +1,30 @@
 // src/app/data.service.ts
 
 import { Injectable } from '@angular/core';
-import { Hole } from './interfaces/holes-interface'; // Ensure you have a model for Hole
+import { HoleInterface } from './interfaces/holes-interface'; // Ensure you have a model for Hole
+import { GolfCourseInterface } from './interfaces/golfCourse-interface';
 
 @Injectable({
   providedIn: 'root'  // This service is provided at the root level
 })
 export class DataService {
-  private url = 'http://localhost:3000/holes';  // The URL to the backend endpoint
+  private url = 'http://localhost:3000/';  // The URL to the backend endpoint
 
   constructor() {}
 
-  async getAllHoles(): Promise<Hole[]> {
+  async getAllHoles(): Promise<HoleInterface[]> {
     try {
-      const response = await fetch(this.url);
+      const response = await fetch(this.url+"holes");
+      const result = await response.json();
+      return result.data ?? []; // Extract the data array or return an empty array if not present
+    } catch (error) {
+      console.error('Error fetching holes:', error);
+      return []; // Return an empty array on error
+    }
+  }
+  async getAllCourses(): Promise<GolfCourseInterface[]> {
+    try {
+      const response = await fetch(this.url+"golfcourse");
       const result = await response.json();
       return result.data ?? []; // Extract the data array or return an empty array if not present
     } catch (error) {
@@ -22,7 +33,7 @@ export class DataService {
     }
   }
 
-  async getHoleById(id: number): Promise<Hole | undefined> {
+  async getHoleById(id: number): Promise<HoleInterface | undefined> {
     try {
       const response = await fetch(`${this.url}/${id}`);
       const result = await response.json();

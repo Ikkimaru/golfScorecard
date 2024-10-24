@@ -1,4 +1,4 @@
-export interface Hole {
+export interface HoleInterface {
     id: number;
     GolfCourseID: number;
     TeeBoxID: number;
