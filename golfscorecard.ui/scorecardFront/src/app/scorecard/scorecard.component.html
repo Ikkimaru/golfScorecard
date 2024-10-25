@@ -1,5 +1,21 @@
-<h1>PlayerID: {{scorecard.playerId}}</h1>
-<h2>GolfCourseID: {{scorecard.golfCourseId}}</h2>
-<h3>TeeBoxID: {{scorecard.teeBoxId}}</h3>
-<h3>Date: {{scorecard.gameDate}}</h3>
-
+<app-home-button></app-home-button>
+<div class="scorecard-container">
+    <div class="scorecard" *ngFor="let scorecard of scoreCards; let i = index" (click)="navigateToScorecard(scorecard)">
+        <span *ngIf="!isLoading">
+            <h1>Player Name: {{ scorecard.playerName }}</h1>
+            <h2>Course Name:</h2>
+            <p class="course-name">{{ scorecard.courseName }}</p> <!-- Course name on a separate line -->
+            <h3>Total Score: {{ scorecard.TotalScore }}</h3>
+            <div class="handicap-container">
+                <span>HI: {{ scorecard.HandicapIndex }}</span>
+                <span>CH: {{ scorecard.CourseHandicap }}</span>
+                <span>PH: {{ scorecard.PlayingHandicap }}</span>
+            </div>
+            <h4>Tee Box: 
+                <span class="tee-box-text">{{ scorecard.teeBoxColor }}</span>
+                <span class="tee-box-color" [ngStyle]="{'background-color': scorecard.teeBoxColor}"></span>
+            </h4>
+            <p>Date: {{ scorecard.GameDate | date: 'dd MMM yyyy (EEEE)' }}</p>
+        </span>
+    </div>
+</div>

@@ -53,6 +53,16 @@ class ScoreService {
     });
   }
 
+  static getScoresByScorecardId(id, callback) {
+    ScoreRepository.getScoresByScorecardId(id, (err, score) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, score);
+      }
+    });
+  }
+
   static updateScore(id, scoreData, callback) {
     try {
       const score = new Score(

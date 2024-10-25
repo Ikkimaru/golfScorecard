@@ -6,6 +6,7 @@ const seedTeeBoxes = () => {
   const teeBoxes = [
     { golfCourseID: 2, color: 'Yellow', yardage: 6419, meters: 5870, courseRating: 71.2, coursePar: 72 },
     { golfCourseID: 1, color: 'Blue', yardage: 400, meters: 365, courseRating: 72.0, coursePar: 72 },
+    { golfCourseID: 3, color: 'Red', yardage: 821, meters: 648, courseRating: 71.0, coursePar: 70 }
   ];
 
   const insertTeeBoxQuery = `

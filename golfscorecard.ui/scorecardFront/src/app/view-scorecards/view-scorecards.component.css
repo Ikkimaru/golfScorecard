@@ -1,0 +1,94 @@
+.scorecard-details {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.player-info {
+    display: flex; /* Use flexbox to arrange items */
+    flex-direction: column; /* Stack items vertically */
+    margin-bottom: 15px; /* Space below player info */
+}
+
+.player-info h2 {
+    margin: 0; /* Remove default margin for consistency */
+}
+
+.player-info h3 {
+    display: flex; /* Use flexbox to arrange course name and date */
+    justify-content: space-between; /* Space between the two items */
+    align-items: center; /* Center align items vertically */
+}
+
+.course-info {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space between course name and date */
+    align-items: center; /* Center align items vertically */
+    margin-top: 5px; /* Optional: space above the course info */
+}
+
+.course-name {
+    margin-right: 20px; /* Space between course name and date */
+}
+
+.date {
+    margin-left: auto; /* Push the date to the right */
+    margin-left: 20px; /* Space between course name and date */
+}
+
+.handicap-container {
+    display: flex; /* Arrange handicap values horizontally */
+    justify-content: flex-start; /* Align items to the left */
+    margin-bottom: 15px; /* Space below handicap info */
+}
+
+.handicap-container span {
+    margin-right: 15px; /* Space between each handicap value */
+}
+
+.tee-box-info {
+    margin-bottom: 15px; /* Space below tee box info */
+}
+
+.tee-box-color {
+    display: inline-block; 
+    width: 20px; 
+    height: 20px; 
+    margin-left: 5px; 
+    vertical-align: middle; 
+    border-radius: 3px; 
+}
+
+.scorecard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px; /* Add space above the table */
+}
+
+.scorecard-table th, .scorecard-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.scorecard-table tr:nth-child(even) td {
+    background-color: #f2f2f2; /* Light grey for even rows */
+}
+
+.scorecard-table tr:nth-child(odd) td {
+    background-color: #ffffff; /* White for odd rows */
+}
+
+h1, h2, h3, h4 {
+    color: #333; /* Dark color for headings */
+}
+
+h2 span, h3 span, h4 span {
+    font-weight: normal; /* Normal weight for spans in headings */
+}
+
+.total-score {
+    margin-top: 20px; /* Space above total score */
+}

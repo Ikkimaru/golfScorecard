@@ -1,1 +1,9 @@
-<p>golf-course works!</p>
+<app-home-button></app-home-button>
+<div class="course-container" *ngFor="let course of courseList" >
+  <div class="course-card" [routerLink]="['/scorecards', course.id]">
+    <h2>{{ course.CourseName }}</h2>
+    <p><strong>Location:</strong> {{ course.Location }}</p>
+    <p><strong>Total Holes:</strong> {{ course.TotalHoles }}</p>
+  </div>
+</div>
+

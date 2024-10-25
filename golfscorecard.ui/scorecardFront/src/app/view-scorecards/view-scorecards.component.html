@@ -1,1 +1,51 @@
-<p>view-scorecards works!</p>
+<div class="scorecard-details" *ngIf="scorecard; else loading">
+    <h1>Scorecard Details</h1>
+    
+    <div class="player-info">
+        <h2>
+            Player Name: <span>{{ scorecard.playerName }}</span>
+        </h2>
+        <h3 class="course-info">
+            <span class="course-name">Course Name: {{ scorecard.courseName }}</span>
+            <span class="date">Date: {{ scorecard.GameDate | date: 'dd MMM yyyy (EEEE)' }}</span>
+        </h3>
+    </div>
+
+    <div class="handicap-container">
+        <span>Handicap Index: <strong>{{ scorecard.HandicapIndex }}</strong></span>
+        <span>Course Handicap: <strong>{{ scorecard.CourseHandicap }}</strong></span>
+        <span>Playing Handicap: <strong>{{ scorecard.PlayingHandicap }}</strong></span>
+    </div>
+
+    <div class="tee-box-info">
+        <h4>Tee Box Color: 
+            <span>{{ scorecard.teeBoxColor }}</span>
+            <span class="tee-box-color" [ngStyle]="{'background-color': scorecard.teeBoxColor}"></span>
+        </h4>
+    </div>
+
+    <h3 *ngIf="scorecard.scores && scorecard.scores.length > 0">Scores:</h3>
+    
+    <table class="scorecard-table" *ngIf="scorecard.scores && scorecard.scores.length > 0">
+        <thead>
+            <tr>
+                <th>Hole</th>
+                <th *ngFor="let score of scorecard.scores; let i = index">{{ i + 1 }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Strokes</td>
+                <td *ngFor="let score of scorecard.scores">{{ score.Strokes }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="total-score">
+        <span>Total Score: {{ scorecard.TotalScore }}</span>
+    </div>
+</div>
+
+<ng-template #loading>
+    <p>Loading scorecard data...</p>
+</ng-template>

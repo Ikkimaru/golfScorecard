@@ -32,6 +32,16 @@ class ScoreRepository extends BaseRepository {
   deleteScore(id, callback) {
     super.delete(id, callback);
   }
+
+  getScoresByScorecardId(scorecardId, callback) {
+    const query = `SELECT * FROM Score WHERE scorecardID = ?`;
+    db.all(query, [scorecardId], (err, rows) => {
+      if (err) {
+        return callback(err);
+      }
+      callback(null, rows);
+    });
+  }
 }
 
 module.exports = new ScoreRepository();

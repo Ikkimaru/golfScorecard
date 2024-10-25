@@ -104,7 +104,7 @@ function createScorecardTable() {
 function createScoreTable() {
   const schema = `
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    ScorecardID INTEGER NOT NULL,
+    scorecardID INTEGER NOT NULL,
     HoleID INTEGER NOT NULL,
     Strokes INTEGER NOT NULL,
     FOREIGN KEY (ScorecardID) REFERENCES Scorecard(id) ON DELETE CASCADE,

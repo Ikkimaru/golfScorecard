@@ -1,0 +1,59 @@
+.scorecard-container {
+  display: flex; /* Use flexbox for layout */
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  margin: 20px;
+}
+
+.scorecard {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  border: 1px solid #ccc; /* Default border */
+  padding: 15px;
+  margin: 10px; /* Space between scorecards */
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  max-width: 250px; /* Set a maximum width for scorecards */
+  width: 100%; /* Take full width of parent */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: add shadow for depth */
+  transition: border 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for border and shadow */
+  cursor: pointer; /* Set the cursor to pointer when hovering over the scorecard */
+}
+
+.scorecard:hover {
+  border: 1px solid #007bff; /* Change border color to blue on hover */
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.8); /* Blue glowing effect */
+  outline: none; /* Remove default outline */
+}
+
+.handicap-container {
+  display: flex;
+  gap: 15px; /* Space between items */
+  font-weight: bold; /* Make the text bolder for emphasis */
+}
+
+.handicap-container span {
+  padding: 5px 10px; /* Add some padding for better spacing */
+  background-color: #e0e0e0; /* Optional: add a background color */
+  border-radius: 3px; /* Optional: rounded corners */
+}
+
+.tee-box-color {
+  display: inline-block; /* Allow it to fit the text */
+  width: 20px; /* Set a fixed width for the color block */
+  height: 20px; /* Set a fixed height for the color block */
+  margin-left: 5px; /* Space between text and color block */
+  vertical-align: middle; /* Align color block with the text */
+  border-radius: 3px; /* Optional: rounded corners for the block */
+}
+
+.tee-box-text {
+  vertical-align: middle; /* Align the text with the color block */
+  line-height: 20px; /* Set line height to match the height of the color block */
+}
+
+.course-name {
+  font-family: 'Arial', sans-serif; /* Change to desired font */
+  font-size: 1.2em; /* Adjust size as needed */
+  margin: 5px 0; /* Space around the course name */
+  color: #555; /* Change color as needed */
+}

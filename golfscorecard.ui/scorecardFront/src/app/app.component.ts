@@ -28,11 +28,11 @@ export class AppComponent implements OnInit {
     // } catch (error) {
     //   console.error('Error fetching data:', error); // Log any errors
     // }
-    try {
-      this.data = await this.dataService.getAllCourses(); // Fetch data
-      console.log('Fetched AllCourses Data' + this.data); // Log fetched data
-    } catch (error) {
-      console.error('Error fetching data:', error); // Log any errors
-    }
+    // try {
+    //   this.data = await this.dataService.getAllCourses(); // Fetch data
+    //   console.log('Fetched AllCourses Data' + this.data); // Log fetched data
+    // } catch (error) {
+    //   console.error('Error fetching data:', error); // Log any errors
+    // }
   }
 }

@@ -1,12 +1,21 @@
 export interface ScorecardInterface {
     id: number;
-    playerId: number;
-    golfCourseId: number;
-    teeBoxId: number;
-    weatherId: number;
-    gameDate: Date;
-    totalScore: number;
-    handicapIndex: number;
-    courseHandicap: number;
-    playingHandicap: number;
+    PlayerID: number;
+    GolfCourseID: number;
+    TeeBoxID: number;
+    WeatherID: number;
+    GameDate: Date;
+    TotalScore: number;
+    HandicapIndex: number;
+    CourseHandicap: number;
+    PlayingHandicap: number;
+    playerName: string;
+    courseName: string;
+    teeBoxColor: string;
+    scores: Array<{
+        id: number;
+        ScorecardID: number;
+        HoleID: number;
+        Strokes: number;
+    }>;
 }

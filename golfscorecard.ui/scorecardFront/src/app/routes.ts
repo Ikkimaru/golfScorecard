@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 import { ScorecardComponent } from './scorecard/scorecard.component';
+import {ViewScorecardsComponent} from './view-scorecards/view-scorecards.component';
+import { GolfCourseComponent } from './golf-course/golf-course.component';
 import { HomeComponent } from './home/home.component';
 
 const routeConfig: Routes = [
@@ -14,9 +16,19 @@ const routeConfig: Routes = [
     title: 'View Scorecards',
   },
   {
-    path: 'golfcourse/:id',
-    component: ScorecardComponent,
+    path: 'golfcourses',
+    component: GolfCourseComponent,
     title: 'View Golfcourse',
+  },
+  {
+    path: 'scorecards/:id',
+    component: ScorecardComponent,
+    title: 'View Scorecards',
+  },
+  {
+    path: 'view-scorecards',
+    component: ViewScorecardsComponent,
+    title: 'View Scorecards',
   },
 ];
 
