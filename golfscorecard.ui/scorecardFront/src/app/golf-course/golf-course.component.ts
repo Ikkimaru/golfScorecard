@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GolfCourseInterface } from '../interfaces/golfCourse-interface';
 import { DataService } from '../data.service';
@@ -10,16 +10,15 @@ import { HomeButtonComponent } from '../home-button/home-button.component';
   standalone: true,
   imports: [CommonModule, RouterModule, HomeButtonComponent],
   templateUrl: './golf-course.component.html',
-  styleUrl: './golf-course.component.css',
+  styleUrls: ['./golf-course.component.css'],
 })
-export class GolfCourseComponent {
+export class GolfCourseComponent implements OnInit {
   courseList: GolfCourseInterface[] = [];
   dataService: DataService = inject(DataService);
-  constructor() {
-    this.dataService
-      .getAllCourses()
-      .then((courseList: GolfCourseInterface[]) => {
-        this.courseList = courseList;
-      });
+
+  constructor() {}
+
+  async ngOnInit() {
+    this.courseList = await this.dataService.getAllCourses();
   }
 }

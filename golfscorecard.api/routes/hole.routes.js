@@ -40,6 +40,19 @@ router.get('/:id', (req, res) => {
   });
 });
 
+// Get hole by CourseId
+router.get('/golfCourse/:id', (req, res) => {
+  HoleService.getHoleByCourseId(req.params.id, (err, hole) => {
+    if (err) {
+      sendResponse(res, 500, 'Failed to retrieve course hole', null, err.message);
+    } else if (!hole) {
+      sendResponse(res, 404, `Hole with ID ${req.params.id} not found`);
+    } else {
+      sendResponse(res, 200, 'Hole retrieved successfully', hole);
+    }
+  });
+});
+
 // Update hole by ID
 router.put('/:id', (req, res) => {
   HoleService.updateHole(req.params.id, req.body, (err, changes) => {

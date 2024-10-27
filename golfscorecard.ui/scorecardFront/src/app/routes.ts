@@ -1,8 +1,9 @@
-import { Routes } from '@angular/router';
-import { ScorecardComponent } from './scorecard/scorecard.component';
+import {Routes} from '@angular/router';
+import {ScorecardComponent} from './scorecard/scorecard.component';
 import {ViewScorecardsComponent} from './view-scorecards/view-scorecards.component';
-import { GolfCourseComponent } from './golf-course/golf-course.component';
-import { HomeComponent } from './home/home.component';
+import {GolfCourseComponent} from './golf-course/golf-course.component';
+import {HomeComponent} from './home/home.component';
+import {PlayerComponent} from './player/player.component';
 
 const routeConfig: Routes = [
   {
@@ -29,6 +30,11 @@ const routeConfig: Routes = [
     path: 'view-scorecards',
     component: ViewScorecardsComponent,
     title: 'View Scorecards',
+  },
+  {
+    path: 'players/:id',
+    component: PlayerComponent,
+    title: 'View Player',
   },
 ];
 

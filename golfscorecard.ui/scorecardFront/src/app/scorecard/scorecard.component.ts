@@ -1,42 +1,47 @@
-import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
-import { ScorecardInterface } from '../interfaces/scorecard-interface';
-import { DataService } from '../data.service';
-import {ScorecardDataService} from '../scorecard-data.service'
-import { HomeButtonComponent } from "../home-button/home-button.component";
-import { Router } from '@angular/router';
+import {Component, inject, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ScorecardInterface} from '../interfaces/scorecard-interface';
+import {DataService} from '../data.service';
+import {ScorecardDataService} from '../scorecard-data.service';
 
 @Component({
   selector: 'app-scorecard',
   standalone: true,
-  imports: [CommonModule,HomeButtonComponent],
+  imports: [CommonModule],
   templateUrl: './scorecard.component.html',
-  styleUrl: './scorecard.component.css',
+  styleUrls: ['./scorecard.component.css'],
 })
-export class ScorecardComponent {
+export class ScorecardComponent implements OnInit {
   route: ActivatedRoute = inject(ActivatedRoute);
   scoreCards: ScorecardInterface[] = [];
   dataService: DataService = inject(DataService);
   isLoading: boolean = true;
 
-  constructor(private scorecardDataService: ScorecardDataService, private router:Router) {
-    const courseId = Number(this.route.snapshot.params['id']);
+  constructor(
+    private readonly scorecardDataService: ScorecardDataService,
+    private readonly router: Router
+  ) {
+  }
 
-    // Load all scorecards and filter by course ID
-    this.dataService.getAllScorecards()
-      .then((scoreCards: ScorecardInterface[]) => {
-        const filteredScorecards = scoreCards.filter(
-          (scoreCard) => scoreCard.GolfCourseID === courseId
-        );
-        
-        // Fetch populated data for each filtered scorecard
-        this.populateScorecards(filteredScorecards);
-      })
-      .catch(error => {
-        console.error('Error loading scorecards:', error);
-        this.isLoading = false;
-      });
+  ngOnInit(): void {
+    const playerId = Number(this.route.snapshot.params['id']);
+    this.loadScorecards(playerId);
+  }
+
+  navigateToScorecard(scorecard: ScorecardInterface): void {
+    this.scorecardDataService.setScorecard(scorecard); // Store scorecard data
+    this.router.navigate(['/view-scorecards']).then(() => this.isLoading = false); // Navigate to the view-scorecards route
+  }
+
+  private async loadScorecards(playerId: number): Promise<void> {
+    try {
+      const scoreCards = await this.dataService.getScorecardsPerPlayer(playerId);
+      this.populateScorecards(scoreCards);
+    } catch (error) {
+      console.error('Error loading scorecards:', error);
+      this.isLoading = false;
+    }
   }
 
   private populateScorecards(scoreCards: ScorecardInterface[]): void {
@@ -53,7 +58,7 @@ export class ScorecardComponent {
           console.error(`Error populating scorecard ${scoreCard.id}:`, error);
         })
     );
-  
+
     // Once all promises are resolved, set loading to false
     Promise.all(populatedPromises)
       .then(() => {
@@ -64,11 +69,4 @@ export class ScorecardComponent {
         this.isLoading = false;
       });
   }
-
-  navigateToScorecard(scorecard: ScorecardInterface) {
-    this.scorecardDataService.setScorecard(scorecard); // Store scorecard data
-    this.router.navigate(['/view-scorecards']); // Navigate to the view-scorecards route
-  }
-  
 }
-

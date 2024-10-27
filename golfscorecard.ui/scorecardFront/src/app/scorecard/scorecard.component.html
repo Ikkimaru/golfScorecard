@@ -1,8 +1,7 @@
-<app-home-button></app-home-button>
 <div class="scorecard-container">
     <div class="scorecard" *ngFor="let scorecard of scoreCards; let i = index" (click)="navigateToScorecard(scorecard)">
         <span *ngIf="!isLoading">
-            <h1>Player Name: {{ scorecard.playerName }}</h1>
+<!--            <h1 *ngIf="route" >Player Name: {{ scorecard.playerName }}</h1>  IF NOT FROM PLAYER DIRECTORY, ADD PLAYER NAME-->
             <h2>Course Name:</h2>
             <p class="course-name">{{ scorecard.courseName }}</p> <!-- Course name on a separate line -->
             <h3>Total Score: {{ scorecard.TotalScore }}</h3>
@@ -11,7 +10,7 @@
                 <span>CH: {{ scorecard.CourseHandicap }}</span>
                 <span>PH: {{ scorecard.PlayingHandicap }}</span>
             </div>
-            <h4>Tee Box: 
+            <h4>Tee Box:
                 <span class="tee-box-text">{{ scorecard.teeBoxColor }}</span>
                 <span class="tee-box-color" [ngStyle]="{'background-color': scorecard.teeBoxColor}"></span>
             </h4>

@@ -60,6 +60,16 @@ class HoleService {
     });
   }
 
+  static getHoleByCourseId(id, callback) {
+    HoleRepository.getHoleByCourseId(id, (err, hole) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, hole);
+      }
+    });
+  }
+
   static updateHole(id, holeData, callback) {
     try {
       const hole = new Hole(

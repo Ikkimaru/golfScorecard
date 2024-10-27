@@ -55,6 +55,20 @@ router.get('/populated/:id', (req, res) => {
   });
 });
 
+// Read - Get a populated scorecard by ID
+router.get('/playerscorecard/:id', (req, res) => {
+  const { id } = req.params;
+  ScorecardService.getPlayerScorecards(id, (err, row) => {
+    if (err) {
+      sendResponse(res, 500, 'Failed to retrieve populated scorecard', null, err.message);
+    } else if (!row) {
+      sendResponse(res, 404, `Scorecard with ID ${id} not found`);
+    } else {
+      sendResponse(res, 200, 'Scorecard retrieved successfully', row);
+    }
+  });
+});
+
 // Update - Update a scorecard by ID
 router.put('/:id', (req, res) => {
   const { id } = req.params;

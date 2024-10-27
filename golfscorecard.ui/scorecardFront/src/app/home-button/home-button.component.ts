@@ -9,7 +9,9 @@ import { Router } from '@angular/router';
   styleUrl: './home-button.component.css'
 })
 export class HomeButtonComponent {
-  constructor(private router: Router){}
+
+
+  constructor(private readonly router: Router){}
   navigateHome() {
     this.router.navigate(['/']); // Adjust the route as needed
   }

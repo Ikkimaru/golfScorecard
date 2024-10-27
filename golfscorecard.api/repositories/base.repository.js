@@ -6,10 +6,6 @@ class BaseRepository {
       this.tableName = tableName;
     }
   
-    createTable(schema) {
-      this.db.run(`CREATE TABLE IF NOT EXISTS ${this.tableName} (${schema})`);
-    }
-  
     add(data, columns, callback) {
       const placeholders = columns.map(() => '?').join(', ');
       const query = `INSERT INTO ${this.tableName} (${columns.join(', ')}) VALUES (${placeholders})`;

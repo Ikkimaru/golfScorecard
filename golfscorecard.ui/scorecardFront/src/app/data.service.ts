@@ -1,10 +1,10 @@
 // src/app/data.service.ts
 
-import { Injectable } from '@angular/core';
-import { HoleInterface } from './interfaces/holes-interface';
-import { GolfCourseInterface } from './interfaces/golfCourse-interface';
-import { ScorecardInterface } from './interfaces/scorecard-interface';
-import { PlayerInterface } from './interfaces/player-interface';
+import {Injectable} from '@angular/core';
+import {HoleInterface} from './interfaces/holes-interface';
+import {GolfCourseInterface} from './interfaces/golfCourse-interface';
+import {ScorecardInterface} from './interfaces/scorecard-interface';
+import {PlayerInterface} from './interfaces/player-interface';
 
 @Injectable({
   providedIn: 'root'  // This service is provided at the root level
@@ -12,11 +12,12 @@ import { PlayerInterface } from './interfaces/player-interface';
 export class DataService {
   private url = 'http://localhost:3000/';  // The URL to the backend endpoint
 
-  constructor() {}
+  constructor() {
+  }
 
   async getAllHoles(): Promise<HoleInterface[]> {
     try {
-      const response = await fetch(this.url+"holes");
+      const response = await fetch(this.url + "holes");
       const result = await response.json();
       return result.data ?? []; // Extract the data array or return an empty array if not present
     } catch (error) {
@@ -24,9 +25,10 @@ export class DataService {
       return []; // Return an empty array on error
     }
   }
+
   async getAllCourses(): Promise<GolfCourseInterface[]> {
     try {
-      const response = await fetch(this.url+"golfcourses");
+      const response = await fetch(this.url + "golfcourses");
       const result = await response.json();
       return result.data ?? []; // Extract the data array or return an empty array if not present
     } catch (error) {
@@ -34,9 +36,10 @@ export class DataService {
       return []; // Return an empty array on error
     }
   }
+
   async getAllScorecards(): Promise<ScorecardInterface[]> {
     try {
-      const response = await fetch(this.url+"scorecards");
+      const response = await fetch(this.url + "scorecards");
       const result = await response.json();
       return result.data ?? []; // Extract the data array or return an empty array if not present
     } catch (error) {
@@ -44,6 +47,17 @@ export class DataService {
       return []; // Return an empty array on error
     }
   }
+  async getScorecardsPerPlayer(id:number): Promise<ScorecardInterface[]> {
+    try {
+      const response = await fetch(this.url + "scorecards/playerscorecard/" + id);
+      const result = await response.json();
+      return result.data ?? []; // Extract the data array or return an empty array if not present
+    } catch (error) {
+      console.error('Error fetching Player Scorecards:', error);
+      return []; // Return an empty array on error
+    }
+  }
+
   async getPopulatedScorecard(id: number): Promise<ScorecardInterface | null> {
     try {
       const response = await fetch(`${this.url}scorecards/populated/${id}`);
@@ -54,6 +68,7 @@ export class DataService {
       return null; // Return null on error to indicate no data
     }
   }
+
   async getHoleById(id: number): Promise<HoleInterface | undefined> {
     try {
       const response = await fetch(`${this.url}/${id}`);
@@ -64,6 +79,18 @@ export class DataService {
       return undefined; // Return undefined on error
     }
   }
+
+  async getHolesByCourseId(id: number): Promise<HoleInterface []> {
+    try {
+      const response = await fetch(`${this.url}holes/golfCourse/${id}`);
+      const result = await response.json();
+      return result.data; // Assuming the single hole object is returned
+    } catch (error) {
+      console.error(`Error fetching hole with ID ${id}:`, error);
+      return []; // Return undefined on error
+    }
+  }
+
   async getPlayerById(id: number): Promise<PlayerInterface | undefined> {
     try {
       const response = await fetch(`${this.url}players/${id}`);
@@ -72,6 +99,17 @@ export class DataService {
     } catch (error) {
       console.error(`Error fetching hole with ID ${id}:`, error);
       return undefined; // Return undefined on error
+    }
+  }
+
+  async getAllPlayers(): Promise<PlayerInterface[]> {
+    try {
+      const response = await fetch(this.url + "players");
+      const result = await response.json();
+      return result.data ?? []; // Extract the data array or return an empty array if not present
+    } catch (error) {
+      console.error('Error fetching players:', error);
+      return []; // Return an empty array on error
     }
   }
 

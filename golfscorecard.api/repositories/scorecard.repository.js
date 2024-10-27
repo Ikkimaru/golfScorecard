@@ -19,6 +19,16 @@ class ScorecardRepository extends BaseRepository {
     super.getAll(callback);
   }
 
+  getPlayerScorecards(playerId, callback) {
+    const query = `SELECT * FROM Scorecard WHERE PlayerID = ?`;
+    db.all(query, [playerId], (err, rows) => {
+      if (err) {
+        return callback(err);
+      }
+      callback(null, rows);
+    });
+  }
+
   getScorecardById(id, callback) {
     super.getById(id, callback);
   }

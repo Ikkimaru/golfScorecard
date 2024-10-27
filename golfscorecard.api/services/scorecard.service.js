@@ -59,6 +59,16 @@ class ScorecardService {
     });
   }
 
+  static getPlayerScorecards(id, callback) {
+    ScorecardRepository.getPlayerScorecards(id,(err, scorecards) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, scorecards);
+      }
+    });
+  }getPlayerScorecards
+
   static getScorecardById(id, callback) {
     ScorecardRepository.getScorecardById(id, (err, scorecard) => {
       if (err) {
