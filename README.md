@@ -8,13 +8,13 @@ The application features a user-friendly interface that allows players to create
 
 ### Player Profile Summary
 
-<img src="./demo-image/profile-summary.png" width="250">
+<img src="./demo-image/profile-summary.png" width="350">
 
 The above image illustrates a **Player Profile**, showcasing the essential details of a player, including their name, email, and handicap index. This profile is crucial for personalizing the golfing experience and tracking each player's performance over time.
 
 ### Detailed Scorecard
 
-<img src="./demo-image/detailed-scorecard.png" width="500">
+<img src="./demo-image/detailed-scorecard.png" width="700">
 
 The **Detailed Scorecard** shown in the image above provides a comprehensive overview of a player's performance during a golf game. It includes information such as the score for each hole, the total strokes taken, and other relevant statistics for both 9-hole and 18-hole games. This feature allows players to analyze their performance and identify areas for improvement.
 

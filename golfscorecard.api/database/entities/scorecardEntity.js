@@ -4,7 +4,7 @@ const BaseEntity = require('./baseEntity');
 
 class ScorecardEntity extends BaseEntity {
   constructor(id, playerId, golfCourseId, teeBoxId, weatherId, gameDate, totalScore, handicapIndex, courseHandicap, playingHandicap, scores) {
-    this.id = id; // Unique identifier for each scorecard
+    super(id); // Call the constructor of BaseEntity
     this.playerId = playerId; // Foreign key for the player
     this.golfCourseId = golfCourseId; // Foreign key for the golf course
     this.teeBoxId = teeBoxId; // Foreign key for the tee box

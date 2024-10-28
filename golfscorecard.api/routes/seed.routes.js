@@ -11,6 +11,7 @@ const seedTeeBoxes = require('../seeds/teeBox.seeder');
 const seedWeatherConditions = require('../seeds/weatherConditions.seeder');
 const seedAchievements = require('../seeds/achievement.seeder');
 const seedPlayerStatistics = require('../seeds/playerStatistics.seeder');
+const seedGroupGames = require('../seeds/groupgame.seeder');
 
 // Route to seed all data
 router.get('/seed', (req, res) => {
@@ -24,6 +25,7 @@ router.get('/seed', (req, res) => {
       seedHoles();
       seedScorecards();
       seedScores();
+      seedGroupGames();
       res.status(200).send('Seeded data successfully.');
     } catch (error) {
       res.status(500).send('Error seeding data: ' + error.message);
@@ -117,6 +119,16 @@ router.get('/seed/playerStatistics', (req, res) => {
     res.status(200).send('Player statistics data seeded successfully.');
   } catch (error) {
     res.status(500).send('Error seeding player statistics data: ' + error.message);
+  }
+});
+
+// Route to seed Group Game data
+router.get('/seed/groupGames', (req, res) => {
+  try {
+    seedGroupGames();
+    res.status(200).send('Group Games data seeded successfully.');
+  } catch (error) {
+    res.status(500).send('Error seeding group games data: ' + error.message);
   }
 });
 

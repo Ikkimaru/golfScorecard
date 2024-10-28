@@ -100,6 +100,31 @@ function createScorecardTable() {
   });
 }
 
+// Create the 'scorecard' table if it doesn't exist
+function createGroupGameTable() {
+  const schema = `
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    ScorecardAID INTEGER NOT NULL,
+    ScorecardBID INTEGER NOT NULL,
+    ScorecardCID INTEGER NOT NULL,
+    ScorecardDID INTEGER NOT NULL,
+    GolfCourseID INTEGER NOT NULL,
+    FOREIGN KEY (ScorecardAID) REFERENCES Scorecard(id),
+    FOREIGN KEY (ScorecardBID) REFERENCES Scorecard(id),
+    FOREIGN KEY (ScorecardCID) REFERENCES Scorecard(id),
+    FOREIGN KEY (ScorecardDID) REFERENCES Scorecard(id),
+    FOREIGN KEY (GolfCourseID) REFERENCES GolfCourse(id)
+  `;
+
+  db.run(`CREATE TABLE IF NOT EXISTS GroupGame (${schema})`, (err) => {
+    if (err) {
+      console.error("Error creating GroupGame table:", err.message);
+    } else {
+      console.log('Groupgame table is ready.');
+    }
+  });
+}
+
 // Create the 'score' table if it doesn't exist
 function createScoreTable() {
   const schema = `
@@ -213,6 +238,7 @@ function initializeDatabase() {
   createWeatherConditionsTable();
   createAchievementTable();
   createPlayerStatisticsTable();
+  createGroupGameTable();
 }
 
 module.exports = {

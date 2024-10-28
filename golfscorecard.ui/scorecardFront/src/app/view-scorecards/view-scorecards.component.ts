@@ -18,6 +18,8 @@ export class ViewScorecardsComponent implements OnInit {
   scorecard!: ScorecardInterface | null;
   holes:HoleInterface[] = [];
   isEditable: boolean = false;
+  originalScores: number[] = [];
+  private originalScoresState: number[] = [];
 
   // Properties for totals
   totalMetersOut = 0;
@@ -34,6 +36,7 @@ export class ViewScorecardsComponent implements OnInit {
     this.scorecard = this.scorecardDataService.getScorecard();
     if (this.scorecard) {
       this.loadCourseHoles(this.scorecard.GolfCourseID);
+      this.originalScores = this.scorecard.scores.map(score => score.Strokes);
     }
   }
 
@@ -57,8 +60,48 @@ export class ViewScorecardsComponent implements OnInit {
   }
 
   toggleEditability() {
-    this.isEditable = !this.isEditable;
+    this.isEditable = !this.isEditable; // Toggle editability
+
+    if (this.isEditable) {
+      // Store original scores when entering edit mode
+      if (this.scorecard && this.scorecard.scores) {
+        this.originalScores = this.scorecard.scores.map(score => score.Strokes);
+        this.originalScoresState = [...this.originalScores]; // Keep a copy for confirmation
+      }
+    } else {
+      // Reset originalScores to match scorecard if canceled
+      this.originalScores = [...this.originalScoresState];
+    }
   }
+
+  confirmEdit() {
+    // Use a local variable for scorecard
+    const scorecard = this.scorecard;
+
+    // Check if scorecard is not null and has scores
+    if (scorecard && scorecard.scores) {
+      // Check if there are changes
+      const hasChanged = this.originalScores.some((score, index) => {
+        return score !== scorecard.scores[index]?.Strokes; // Use optional chaining
+      });
+
+      if (hasChanged) {
+        // Update the scorecard with new values
+        scorecard.scores.forEach((score, index) => {
+          // Ensure index is within bounds before accessing scores
+          if (scorecard.scores[index]) {
+            scorecard.scores[index].Strokes = this.originalScores[index];
+          }
+        });
+        alert('Scores updated successfully.');
+      }
+    } else {
+      alert('Scorecard is not available or has no scores.');
+    }
+
+    this.isEditable = false; // Lock the inputs after confirming
+  }
+
   private async loadCourseHoles(courseId: number): Promise<void> {
     try {
       const holes = await this.dataService.getHolesByCourseId(courseId);
@@ -74,19 +117,51 @@ export class ViewScorecardsComponent implements OnInit {
   }
 
   private calculateTotals(): void {
+    // Initialize totals
+    this.totalMetersOut = 0;
+    this.totalParOut = 0;
+    this.totalMetersIn = 0;
+    this.totalParIn = 0;
+
     const frontNine = this.holes.slice(0, 9);
     const backNine = this.holes.slice(9, 18);
 
     // Calculate totals for front nine
     this.totalMetersOut = frontNine.reduce((acc, hole) => acc + hole.Meters, 0);
     this.totalParOut = frontNine.reduce((acc, hole) => acc + hole.Par, 0);
-    if (this.scorecard?.scores) {
-      this.totalStrokesOut = this.scorecard.scores.slice(0, 9).reduce((acc, score) => acc + score.Strokes, 0);
+
+    // Check if scorecard and scores exist
+    if (this.scorecard && this.scorecard.scores) {
+      // Ensure scores are available for front nine
+      this.totalStrokesOut = this.scorecard.scores.slice(0, 9).reduce((acc, score) => acc + (score.Strokes || 0), 0);
     }
 
     // Calculate totals for back nine
     this.totalMetersIn = backNine.reduce((acc, hole) => acc + hole.Meters, 0);
     this.totalParIn = backNine.reduce((acc, hole) => acc + hole.Par, 0);
-    this.totalStrokesIn = this.scorecard?.scores.slice(9, 18).reduce((acc, score) => acc + score.Strokes, 0) || 0;
+
+    // Ensure scores are available for back nine
+    if (this.scorecard && this.scorecard.scores) {
+      this.totalStrokesIn = this.scorecard.scores.slice(9, 18).reduce((acc, score) => acc + (score.Strokes || 0), 0);
+    }
   }
+  calculateDisplayScores(): { totalIn: number; totalOut: number } {
+    // Safely get front nine and back nine scores
+    const frontNineScores = this.scorecard?.scores.slice(0, 9) || [];
+    const backNineScores = this.scorecard?.scores.slice(9, 18) || [];
+
+    const totalIn = backNineScores.reduce((acc, score) => {
+      const strokes = score.Strokes; // Convert string to number
+      return acc + (isNaN(strokes) ? 0 : strokes); // Handle NaN values
+    }, 0);
+
+    const totalOut = frontNineScores.reduce((acc, score) => {
+      const strokes = score.Strokes; // Convert string to number
+      return acc + (isNaN(strokes) ? 0 : strokes); // Handle NaN values
+    }, 0);
+
+    return { totalIn, totalOut };
+  }
+
+
 }

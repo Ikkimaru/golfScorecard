@@ -61,9 +61,10 @@
     <tr>
       <td>Strokes</td>
       <td *ngFor="let score of scorecard.scores; let index = index">
-        <input
-          type="text"
-          [(ngModel)]="score.Strokes"
+        <ng-container *ngIf="isEditable; else displayScore">
+        <input *ngIf="isEditable"
+          type="number"
+          [(ngModel)]="originalScores[index]"
           pattern="^\d{0,2}$"
           maxlength="2"
           size="2"
@@ -72,10 +73,14 @@
           class="two-digit-input"
           [disabled]="!isEditable"
         />
+        </ng-container>
+        <ng-template #displayScore>
+          {{ score.Strokes }}
+        </ng-template>
       </td>
-      <td class="total-cell">{{ totalStrokesIn }}</td> <!-- Total for the first nine -->
-      <td class="total-cell">{{ totalStrokesOut }}</td> <!-- Total for the second nine -->
-      <td class="total-cell">{{ totalStrokesIn + totalStrokesOut }}</td> <!-- Overall Total -->
+      <td class="total-cell">{{ calculateDisplayScores().totalIn }}</td> <!-- Total for the first nine -->
+      <td class="total-cell">{{ calculateDisplayScores().totalOut }}</td> <!-- Total for the second nine -->
+      <td class="total-cell">{{ calculateDisplayScores().totalIn + calculateDisplayScores().totalOut }}</td> <!-- Overall Total -->
     </tr>
     </tbody>
   </table>
@@ -83,8 +88,13 @@
   <div class="total-score">
     <span>Total Score: {{ scorecard.TotalScore }}</span>
   </div>
+
   <button (click)="toggleEditability()">
-    {{ isEditable ? 'Lock Inputs' : 'Edit Scores' }}
+    {{ isEditable ? 'Cancel' : 'Edit Scores' }}
+  </button>
+
+  <button *ngIf="isEditable" (click)="confirmEdit()">
+    Confirm
   </button>
 </div>
 

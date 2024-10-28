@@ -10,6 +10,7 @@ const scoreRoutes = require('./score.routes');
 const weatherRoutes = require('./weatherConditions.routes');
 const achievementRoutes = require('./achievement.routes');
 const playerstatisticRoutes = require('./playerStatistics.routes');
+const groupGamesRoutes = require('./groupgame.routes')
 
 // Initialize router
 const router = express.Router();
@@ -24,5 +25,6 @@ router.use('/scores', scoreRoutes);
 router.use('/weather', weatherRoutes);
 router.use('/achievements', achievementRoutes);
 router.use('/playerstatistics', playerstatisticRoutes);
+router.use('/groupgames', groupGamesRoutes);
 
 module.exports = router;
