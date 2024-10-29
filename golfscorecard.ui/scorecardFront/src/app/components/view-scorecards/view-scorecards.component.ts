@@ -1,9 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ScorecardDataService } from '../scorecard-data.service';
-import { ScorecardInterface } from '../interfaces/scorecard-interface';
-import {DataService} from '../data.service';
-import {HoleInterface} from '../interfaces/holes-interface';
+import { ScorecardDataService } from '../../scorecard-data.service';
+import { ScorecardInterface } from '../../interfaces/scorecard-interface';
+import {DataService} from '../../data.service';
+import {HoleInterface} from '../../interfaces/holes-interface';
 import { FormsModule } from '@angular/forms';
 
 @Component({

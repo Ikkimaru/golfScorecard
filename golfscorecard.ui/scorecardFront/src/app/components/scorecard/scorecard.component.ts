@@ -1,9 +1,9 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ScorecardInterface} from '../interfaces/scorecard-interface';
-import {DataService} from '../data.service';
-import {ScorecardDataService} from '../scorecard-data.service';
+import {ScorecardInterface} from '../../interfaces/scorecard-interface';
+import {DataService} from '../../data.service';
+import {ScorecardDataService} from '../../scorecard-data.service';
 
 @Component({
   selector: 'app-scorecard',

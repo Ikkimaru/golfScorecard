@@ -38,7 +38,7 @@
     </thead>
     <tbody>
     <tr class="tee-row">
-      <td>Tee: {{ holes[0]?.TeeBoxID }}</td>
+      <td>Tee: {{ holes[0].TeeBoxID }}</td>
       <td *ngFor="let hole of holes">{{ hole.Meters }}</td>
       <td class="total-cell">{{ totalMetersOut }}</td> <!-- Total for the first nine -->
       <td class="total-cell">{{ totalMetersIn }}</td> <!-- Total for the second nine -->

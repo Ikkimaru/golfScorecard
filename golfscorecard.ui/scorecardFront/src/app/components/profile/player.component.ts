@@ -1,8 +1,8 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {PlayerInterface} from '../interfaces/player-interface';
-import {ScorecardInterface} from '../interfaces/scorecard-interface';
-import {DataService} from '../data.service';
+import {PlayerInterface} from '../../interfaces/player-interface';
+import {ScorecardInterface} from '../../interfaces/scorecard-interface';
+import {DataService} from '../../data.service';
 import {ActivatedRoute} from '@angular/router';
 import {ScorecardComponent} from '../scorecard/scorecard.component';
 
@@ -13,7 +13,7 @@ import {ScorecardComponent} from '../scorecard/scorecard.component';
   templateUrl: './player.component.html',
   styleUrl: './player.component.css'
 })
-export class PlayerComponent implements OnInit {
+export class ProfileComponent implements OnInit {
   route: ActivatedRoute = inject(ActivatedRoute);
   player: PlayerInterface | null = null;
   scorecards: ScorecardInterface[] = [];

@@ -1,4 +1,3 @@
-<app-home-button></app-home-button>
 <div class="course-container" *ngFor="let course of courseList" >
   <div class="course-card" [routerLink]="['/scorecards', course.id]">
     <h2>{{ course.CourseName }}</h2>

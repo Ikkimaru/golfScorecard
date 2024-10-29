@@ -1,5 +1,9 @@
 <a [routerLink]="['/golfcourses']">Go to Golf Courses</a>
 <div *ngFor="let player of players">
 <a [routerLink]="['/players', player.id]">{{player.FirstName}} {{player.LastName}}</a>
+</div>
 
+<div *ngIf="currentUser">
+  <p>Welcome, {{ currentUser.username }}!</p>
+  <button (click)="logout()">Logout</button>
 </div>

@@ -1,14 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { GolfCourseInterface } from '../interfaces/golfCourse-interface';
-import { DataService } from '../data.service';
+import { GolfCourseInterface } from '../../interfaces/golfCourse-interface';
+import { DataService } from '../../data.service';
 import { RouterModule } from '@angular/router';
-import { HomeButtonComponent } from '../home-button/home-button.component';
 
 @Component({
   selector: 'app-golf-course',
   standalone: true,
-  imports: [CommonModule, RouterModule, HomeButtonComponent],
+  imports: [CommonModule, RouterModule],
   templateUrl: './golf-course.component.html',
   styleUrls: ['./golf-course.component.css'],
 })
