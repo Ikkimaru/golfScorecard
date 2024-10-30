@@ -20,7 +20,7 @@ class ScorecardRepository extends BaseRepository {
   }
 
   getPlayerScorecards(playerId, callback) {
-    const query = `SELECT * FROM Scorecard WHERE PlayerID = ?`;
+    const query = `SELECT * FROM Scorecard WHERE PlayerID = ? ORDER BY GameDate`;
     db.all(query, [playerId], (err, rows) => {
       if (err) {
         return callback(err);

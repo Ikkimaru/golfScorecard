@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@media (forced-colors: active) {
+  /* Styles for forced colors mode */
+  body {
+    background-color: Window;
+    color: WindowText;
+  }
+
+  /* Other styles */
+}

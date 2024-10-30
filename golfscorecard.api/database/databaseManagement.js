@@ -18,6 +18,7 @@ function createPlayerTable() {
     FirstName TEXT NOT NULL,
     LastName TEXT NOT NULL,
     Email TEXT NOT NULL,
+    Password TEXT NOT NULL,
     HandicapIndex REAL
   `;
 

@@ -3,5 +3,6 @@ export interface PlayerInterface {
     FirstName: string;
     LastName: string;
     Email: string;
+    Password: string;
     HandicapIndex: number;
 }

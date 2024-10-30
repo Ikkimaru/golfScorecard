@@ -3,12 +3,17 @@
   <form (ngSubmit)="login()">
     <div>
       <label for="username">Username:</label>
-      <input type="text" id="username" [(ngModel)]="username" name="username" required />
+      <select id="username" [(ngModel)]="username" name="username" required>
+        <option *ngFor="let player of players" [value]="player.Email">{{ player.FirstName }} {{ player.LastName }}</option>
+      </select>
     </div>
     <div>
       <label for="password">Password:</label>
       <input type="password" id="password" [(ngModel)]="password" name="password" required />
     </div>
+    <div *ngIf="loginError" class="error">{{ loginError }}</div> <!-- Display error messages -->
     <button type="submit">Login</button>
   </form>
 </div>
+
+<!--<input type="text" id="username" [(ngModel)]="username" name="username" required />-->

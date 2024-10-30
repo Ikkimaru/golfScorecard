@@ -15,7 +15,7 @@ import {NavBarComponent} from '../nav-bar/nav-bar.component';
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit{
-  currentUser: { username: string, password: string } | null = null;
+  currentUser: PlayerInterface | null = null;
 
   constructor(private userDataService: UserDataService, private readonly router: Router) {
   }

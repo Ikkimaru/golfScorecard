@@ -15,6 +15,28 @@ export class DataService {
   constructor() {
   }
 
+  async getLoginDetails(username: string, password: string): Promise<any> {
+    try {
+      console.log('Data service: getting login details');
+      const response = await fetch(this.url + "login", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+      });
+      if (!response.ok) {
+        throw new Error(`Login failed with status ${response.status}`);
+      }
+      const result = await response.json();
+      return result.data ?? null; // Extract the data or return null if not present
+    } catch (error) {
+      console.error('Error fetching User:', error);
+      return null; // Return null on error
+    }
+  }
+
+
   async getAllHoles(): Promise<HoleInterface[]> {
     try {
       const response = await fetch(this.url + "holes");

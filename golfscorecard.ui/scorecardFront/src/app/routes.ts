@@ -52,6 +52,12 @@ const routeConfig: Routes = [
     title: 'View Player',
     canActivate: [authGuard]
   },
+  {
+    path: 'player',
+    component: ProfileComponent,
+    title: 'View Player',
+    canActivate: [authGuard]
+  },
 ];
 
 export default routeConfig;

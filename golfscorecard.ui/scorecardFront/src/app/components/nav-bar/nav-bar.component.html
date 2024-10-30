@@ -1,13 +1,13 @@
 <!-- src/app/nav-bar/nav-bar.component.html -->
-<nav *ngIf="!isLoading" class="navbar">
-  <div class="navbar-container">
-    <div *ngIf="currentUser">
-      <a routerLink="/" class="navbar-brand">Welcome, {{ currentUser.username }}</a>
+<nav *ngIf="currentUser" class="navbar">
+  <div *ngIf="!isLoading"  class="navbar-container">
+    <div>
+      <a routerLink="/homePage" class="navbar-brand">Welcome, {{ currentUser.FirstName }}</a>
     </div>
     <ul class="navbar-menu">
       <li><a routerLink="/addscore">Add Score</a></li>
-      <li><a routerLink="/view-scorecards">Scorecards</a></li>
-      <li><a routerLink="/profile">Profile</a></li>
+      <li><a routerLink="/scorecard">Scorecards</a></li>
+      <li><a routerLink="player">Profile</a></li>
       <li><a (click)="logout()">Logout</a></li>
     </ul>
   </div>

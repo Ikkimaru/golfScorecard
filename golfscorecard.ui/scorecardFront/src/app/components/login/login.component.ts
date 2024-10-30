@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {DataService} from '../../data.service';
 import { UserDataService } from '../../user-data.service';
 import { Router } from '@angular/router';
 import{FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
-import * as bcrypt from 'bcryptjs';
-import {GeneralComponent} from '../general/general.component';
+import {PlayerInterface} from '../../interfaces/player-interface';
 
 @Component({
   selector: 'app-login',
@@ -14,33 +14,51 @@ import {GeneralComponent} from '../general/general.component';
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit{
+  players: any[] = [];
   username: string = '';
   password: string = '';
+  playerInterface!: PlayerInterface;
+  loginError: string = '';
 
-  constructor(private readonly userDataService: UserDataService, private readonly router: Router) {}
+  constructor(private readonly dataService: DataService,private readonly userDataService: UserDataService, private readonly router: Router) {}
 
   ngOnInit(): void {
     this.userDataService.clearUserData();
+    this.loadPlayers().then(() => {
+      console.log('Players loaded in OnInit:', this.players); // Now this will show the correct players
+    });
   }
 
+  async loadPlayers(): Promise<void> {
+    try {
+      this.players = await this.dataService.getAllPlayers();
+    } catch (error) {
+      console.error('Error loading players:', error);
+    }
+  }
   async login() {
-    // Hash the password
-    //const hashedPassword = await this.hashPassword(this.password);
-    const hashedPassword = "a";
+    try {
+      if (!this.username) {
+        this.loginError = 'Please select a username'; // Set error message if username is not selected
+        console.error('Login failed: No username selected');
+        return;
+      }
 
-    // Here you would typically send the hashed password to your backend for verification
-    // For example, you can call an authentication service
-    // this.authService.login(this.username, hashedPassword).subscribe(...);
+      this.playerInterface = await this.dataService.getLoginDetails(this.username, this.password);
 
-    // Assuming the authentication was successful:
-    this.userDataService.setUserData({ username: this.username, password: hashedPassword });
-    this.router.navigate(['homePage']);
-  }
-
-  private async hashPassword(password: string): Promise<string> {
-    // Generate a salt and hash the password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-    return hashedPassword;
+      // Check if the login was successful
+      if (this.playerInterface) {
+        // Save user data to local storage or manage it appropriately
+        this.userDataService.setUserData(this.playerInterface);
+        // Navigate to the home page
+        this.router.navigate(['homePage']);
+      } else {
+        this.loginError = 'Invalid username or password'; // Set error message
+        console.error('Login failed: Invalid username or password');
+      }
+    } catch (error) {
+      this.loginError = 'An error occurred during login'; // Set error message
+      console.error('Error during login:', error);
+    }
   }
 }

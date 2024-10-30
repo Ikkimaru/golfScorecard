@@ -1,8 +1,23 @@
-// Location: services/login.service.js
+const LoginRepository = require("../repositories/login.repository");
 
-const bcrypt = require('bcryptjs');
-
-async function verifyPassword(enteredPassword, storedHashedPassword) {
-    const isMatch = await bcrypt.compare(enteredPassword, storedHashedPassword);
-    return isMatch; // returns true if passwords match, false otherwise
+class LoginService {
+    static getLoginDetails({ username, password }, callback) {
+        // Retrieve user details by username
+        LoginRepository.getLoginDetails(username, async (err, user) => {
+            if (err) {
+                return callback(err);
+            }
+            // Check if user exists and verify password
+            if (user && password === user.Password) {
+                // Passwords match, return user details without password
+                const { password, ...userWithoutPassword } = user;
+                return callback(null, userWithoutPassword);
+            } else {
+                // User not found or password mismatch
+                return callback(null, null);
+            }
+        });
+    }
 }
+
+module.exports = LoginService;

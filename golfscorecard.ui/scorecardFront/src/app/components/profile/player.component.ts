@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {PlayerInterface} from '../../interfaces/player-interface';
 import {ScorecardInterface} from '../../interfaces/scorecard-interface';
 import {DataService} from '../../data.service';
+import {UserDataService} from '../../user-data.service';
 import {ActivatedRoute} from '@angular/router';
 import {ScorecardComponent} from '../scorecard/scorecard.component';
 
@@ -18,11 +19,18 @@ export class ProfileComponent implements OnInit {
   player: PlayerInterface | null = null;
   scorecards: ScorecardInterface[] = [];
   dataService: DataService = inject(DataService);
+  userDataService: UserDataService = inject(UserDataService);
 
   ngOnInit(): void {
-    const playerId = Number(this.route.snapshot.params['id'])
+    let playerId = Number(this.route.snapshot.params['id']); // Get playerId from route
+    if (!playerId) {
+      playerId = this.userDataService.getUserData()?.id ?? 0; // Try to get it from userDataService
+    }
+    // If playerId is valid (not 0), load player data
     if (playerId) {
       this.loadPlayerData(playerId);
+    } else {
+      console.warn('No playerId available. Player data will not be loaded.');
     }
   }
 

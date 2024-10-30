@@ -1,7 +1,7 @@
 <div class="scorecard-container">
-    <div class="scorecard" *ngFor="let scorecard of scoreCards; let i = index" (click)="navigateToScorecard(scorecard)">
+    <div class="scorecard" *ngFor="let scorecard of scoreCards; let i = index" (click)="navigateToScorecard(scorecard)"tabindex="0">
         <span *ngIf="!isLoading">
-<!--            <h1 *ngIf="route" >Player Name: {{ scorecard.playerName }}</h1>  IF NOT FROM PLAYER DIRECTORY, ADD PLAYER NAME-->
+<!--            <h1 *ngIf="route" >Player Name: {{ scorecard.playerName }}</h1>  IF ADMIN PAGE, ADD PLAYER NAME-->
             <h2>Course Name:</h2>
             <p class="course-name">{{ scorecard.courseName }}</p> <!-- Course name on a separate line -->
             <h3>Total Score: {{ scorecard.TotalScore }}</h3>
