@@ -1,0 +1,72 @@
+name: Update Data
+
+on:
+  push:
+    paths:
+      - 'golfScorecard/golfscorecard.api/database/**' # Trigger on updates to the database folder
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    env:
+      skip: 'false'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up SQLite
+        run: sudo apt-get install -y sqlite3
+
+      # Export each table to a JSON file in the _data directory
+      - name: Export Player Table
+        run: sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM Player;" > _data/player.json
+
+      - name: Export GolfCourse Table
+        run: sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM GolfCourse;" > _data/golf_course.json
+
+      - name: Export Hole Table
+        run: sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM Hole;" > _data/hole.json
+
+      - name: Export Score Table
+        run: sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM Score;" > _data/score.json
+
+      - name: Export TeeBox Table
+        run: sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM TeeBox;" > _data/tee_box.json
+
+      - name: Export WeatherConditions Table
+        run: sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM WeatherConditions;" > _data/weather_conditions.json
+
+      - name: Export Achievement Table
+        run: sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM Achievement;" > _data/achievement.json
+
+      - name: Export PlayerStatistics Table
+        run: sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM PlayerStatistics;" > _data/player_statistics.json
+
+      # Check if there are changes to commit
+      - name: Check for changes
+        id: check_changes
+        run: |
+          git add _data/*.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            echo "::set-output name=changes::false"
+            echo "skip=true" >> $GITHUB_ENV
+          else
+            echo "Changes detected"
+            echo "::set-output name=changes::true"
+          fi
+
+      # Commit changes only if there are staged changes
+      - name: Commit changes
+        if: steps.check_changes.outputs.changes == 'true'
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update data files from SQLite tables"
+
+      # Push changes only if there are changes and skip is not set to 'true'
+      - name: Push changes
+        if: success() && env.skip != 'true'
+        run: |
+          git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/Ikkimaru/Ikkimaru.git
