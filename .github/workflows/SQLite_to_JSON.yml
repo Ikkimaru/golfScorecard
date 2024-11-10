@@ -1,4 +1,4 @@
-name: Update Data
+name: SQLite_to_JSON
 
 on:
   push:
@@ -18,30 +18,46 @@ jobs:
       - name: Set up SQLite
         run: sudo apt-get install -y sqlite3
 
-      # Export each table to a JSON file in the _data directory
-      - name: Export Player Table
-        run: sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM Player;" > _data/player.json
+      # Ensure JSON file creation for each table
+      - name: Prepare Player Table JSON
+        run: |
+          touch _data/player.json
+          sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM Player;" > _data/player.json
 
-      - name: Export GolfCourse Table
-        run: sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM GolfCourse;" > _data/golf_course.json
+      - name: Prepare GolfCourse Table JSON
+        run: |
+          touch _data/golf_course.json
+          sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM GolfCourse;" > _data/golf_course.json
 
-      - name: Export Hole Table
-        run: sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM Hole;" > _data/hole.json
+      - name: Prepare Hole Table JSON
+        run: |
+          touch _data/hole.json
+          sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM Hole;" > _data/hole.json
 
-      - name: Export Score Table
-        run: sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM Score;" > _data/score.json
+      - name: Prepare Score Table JSON
+        run: |
+          touch _data/score.json
+          sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM Score;" > _data/score.json
 
-      - name: Export TeeBox Table
-        run: sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM TeeBox;" > _data/tee_box.json
+      - name: Prepare TeeBox Table JSON
+        run: |
+          touch _data/tee_box.json
+          sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM TeeBox;" > _data/tee_box.json
 
-      - name: Export WeatherConditions Table
-        run: sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM WeatherConditions;" > _data/weather_conditions.json
+      - name: Prepare WeatherConditions Table JSON
+        run: |
+          touch _data/weather_conditions.json
+          sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM WeatherConditions;" > _data/weather_conditions.json
 
-      - name: Export Achievement Table
-        run: sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM Achievement;" > _data/achievement.json
+      - name: Prepare Achievement Table JSON
+        run: |
+          touch _data/achievement.json
+          sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM Achievement;" > _data/achievement.json
 
-      - name: Export PlayerStatistics Table
-        run: sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM PlayerStatistics;" > _data/player_statistics.json
+      - name: Prepare PlayerStatistics Table JSON
+        run: |
+          touch _data/player_statistics.json
+          sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM PlayerStatistics;" > _data/player_statistics.json
 
       # Check if there are changes to commit
       - name: Check for changes
