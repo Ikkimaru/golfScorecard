@@ -1,4 +1,4 @@
-name: Update Data
+name: SQLite_to_JSON
 
 on:
   push:
@@ -20,7 +20,7 @@ jobs:
 
       # Export each table to a JSON file in the _data directory
       - name: Export Player Table
-        run: sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM Player;" > _data/player.json
+        run: sqlite3 -json golfscorecard.api/database/golfScores.db "SELECT * FROM Player;" > _data/player.json
 
       - name: Export GolfCourse Table
         run: sqlite3 -json golfScorecard/golfscorecard.api/database/golfScores.db "SELECT * FROM GolfCourse;" > _data/golf_course.json
