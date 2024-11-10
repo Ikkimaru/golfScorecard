@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ScorecardDataService } from '../../scorecard-data.service';
 import { ScorecardInterface } from '../../interfaces/scorecard-interface';
 import {DataService} from '../../data.service';
+import{UserDataService} from '../../user-data.service';
 import {HoleInterface} from '../../interfaces/holes-interface';
 import { FormsModule } from '@angular/forms';
 
@@ -15,6 +16,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class ViewScorecardsComponent implements OnInit {
   dataService: DataService = inject(DataService);
+  userDataService : UserDataService = inject(UserDataService);
+  player = this.userDataService.getUserData();
   scorecard!: ScorecardInterface | null;
   holes:HoleInterface[] = [];
   isEditable: boolean = false;

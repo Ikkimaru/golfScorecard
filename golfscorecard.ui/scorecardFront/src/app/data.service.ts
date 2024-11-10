@@ -17,7 +17,6 @@ export class DataService {
 
   async getLoginDetails(username: string, password: string): Promise<any> {
     try {
-      console.log('Data service: getting login details');
       const response = await fetch(this.url + "login", {
         method: 'POST',
         headers: {

@@ -27,6 +27,7 @@ export class ScorecardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.scorecardDataService.deleteScorecard();
     let playerId = Number(this.route.snapshot.params['id']); // Get playerId from route
     if (!playerId) {
       playerId = this.userDataService.getUserData()?.id ?? 0; // Try to get it from userDataService

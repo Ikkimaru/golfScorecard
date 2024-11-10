@@ -7,7 +7,7 @@ const seedScores = () => {
     { scorecardID: 1, holeID: 1, strokes: 4 },
     { scorecardID: 1, holeID: 2, strokes: 3 },
     { scorecardID: 1, holeID: 3, strokes: 9 },
-    { scorecardID: 2, holeID: 1, strokes: 3 },
+    { scorecardID: 2, holeID: 1, strokes: 3 }, //Scorecard 2, Player John, Course Green Valley Golf Club
     { scorecardID: 2, holeID: 2, strokes: 5 },
     { scorecardID: 2, holeID: 3, strokes: 6 },
     { scorecardID: 2, holeID: 4, strokes: 5 },

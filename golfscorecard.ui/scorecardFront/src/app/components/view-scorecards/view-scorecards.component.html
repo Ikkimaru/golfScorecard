@@ -2,7 +2,7 @@
   <h1>Scorecard Details</h1>
 
   <div class="player-info">
-    <h2>
+    <h2 *ngIf="scorecard.PlayerID != player?.id">
       Player Name: <span>{{ scorecard.playerName }}</span>
     </h2>
     <h3 class="course-info">
@@ -72,6 +72,7 @@
           title="Please enter a number between 0 and 99"
           class="two-digit-input"
           [disabled]="!isEditable"
+               (ngModelChange)="calculateDisplayScores()"
         />
         </ng-container>
         <ng-template #displayScore>

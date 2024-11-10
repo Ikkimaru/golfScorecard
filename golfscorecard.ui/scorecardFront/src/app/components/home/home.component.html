@@ -2,8 +2,3 @@
 <div *ngFor="let player of players">
 <a [routerLink]="['/players', player.id]">{{player.FirstName}} {{player.LastName}}</a>
 </div>
-
-<div *ngIf="currentUser">
-  <p>Welcome, {{ currentUser.FirstName }}!</p>
-  <button (click)="logout()">Logout</button>
-</div>

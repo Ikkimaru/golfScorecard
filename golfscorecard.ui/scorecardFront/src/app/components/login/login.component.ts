@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit{
   ngOnInit(): void {
     this.userDataService.clearUserData();
     this.loadPlayers().then(() => {
-      console.log('Players loaded in OnInit:', this.players); // Now this will show the correct players
+      //console.log('Players loaded in OnInit:', this.players); // Now this will show the correct players
     });
   }
 

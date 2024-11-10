@@ -7,7 +7,7 @@ const seedHoles = () => {
     { golfCourseID: 1, teeBoxID: 1, holeNumber: 1, par: 4, handicapStroke: 2, yardage: 400, meters: 365 },
     { golfCourseID: 3, teeBoxID: 1, holeNumber: 2, par: 3, handicapStroke: 5, yardage: 150, meters: 137 },
     { golfCourseID: 3, teeBoxID: 1, holeNumber: 1, par: 4, handicapStroke: 3, yardage: 350, meters: 320 },
-    { golfCourseID: 2, teeBoxID: 1, holeNumber: 1, par: 4, handicapStroke: 5, yardage: 429, meters: 393 },
+    { golfCourseID: 2, teeBoxID: 1, holeNumber: 1, par: 4, handicapStroke: 5, yardage: 429, meters: 393 }, //Course Green Valley Golf Club
     { golfCourseID: 2, teeBoxID: 1, holeNumber: 2, par: 4, handicapStroke: 7, yardage: 392, meters: 359 },
     { golfCourseID: 2, teeBoxID: 1, holeNumber: 3, par: 4, handicapStroke: 15, yardage: 309, meters: 283 },
     { golfCourseID: 2, teeBoxID: 1, holeNumber: 4, par: 3, handicapStroke: 11, yardage: 160, meters: 147 },

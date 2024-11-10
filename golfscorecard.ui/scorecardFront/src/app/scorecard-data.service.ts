@@ -14,9 +14,12 @@ export class ScorecardDataService {
   getScorecard(): ScorecardInterface | null {
     const data = localStorage.getItem(this.storageKey);
     if (data) {
-      const scorecardData = JSON.parse(data);
-      return scorecardData; // Return the parsed data
+      return JSON.parse(data); // Return the parsed data
     }
     return null; // Return null if no data is found
+  }
+
+  deleteScorecard(): void {
+    localStorage.removeItem(this.storageKey); // Remove scorecard data from local storage
   }
 }
