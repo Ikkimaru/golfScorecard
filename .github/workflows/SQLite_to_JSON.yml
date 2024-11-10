@@ -85,4 +85,4 @@ jobs:
       - name: Push changes
         if: success() && env.skip != 'true'
         run: |
-          git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/Ikkimaru/golfScorecard.git
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/Ikkimaru/golfScorecard.git
