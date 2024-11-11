@@ -1,0 +1,3 @@
+[{"id":1,"GolfCourseID":2,"Color":"Yellow","Yardage":6419,"Meters":5870,"CourseRating":71.200000000000002843,"CoursePar":72},
+{"id":2,"GolfCourseID":1,"Color":"Blue","Yardage":400,"Meters":365,"CourseRating":71.999999999999999998,"CoursePar":72},
+{"id":3,"GolfCourseID":3,"Color":"Red","Yardage":821,"Meters":648,"CourseRating":70.999999999999999999,"CoursePar":70}]

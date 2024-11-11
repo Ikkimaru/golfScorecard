@@ -1,0 +1,5 @@
+[{"id":1,"FirstName":"John","LastName":"Doe","Email":"john.doe@example.com","Password":"a","HandicapIndex":10.499999999999999999},
+{"id":2,"FirstName":"Mike","LastName":"Johnson","Email":"mike.johnson@example.com","Password":"a","HandicapIndex":8.0},
+{"id":3,"FirstName":"Emily","LastName":"Davis","Email":"emily.davis@example.com","Password":"a","HandicapIndex":15.499999999999999999},
+{"id":4,"FirstName":"Jane","LastName":"Smith","Email":"jane.smith@example.com","Password":"a","HandicapIndex":12.0},
+{"id":5,"FirstName":"Chris","LastName":"Brown","Email":"chris.brown@example.com","Password":"a","HandicapIndex":5.0}]

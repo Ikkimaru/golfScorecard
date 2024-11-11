@@ -1,0 +1,2 @@
+[{"id":1,"Temperature":68.000000000000000001,"WindSpeed":10.0,"WeatherDescription":"Partly Cloudy","ChanceOfPrecipitation":20.0,"PrecipitationAmount":0.10000000000000000555,"Date":"2023-10-02"},
+{"id":2,"Temperature":75.0,"WindSpeed":5.0,"WeatherDescription":"Sunny","ChanceOfPrecipitation":0.0,"PrecipitationAmount":0.0,"Date":"2023-10-01"}]
