@@ -2,8 +2,8 @@ import {Component, inject, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {PlayerInterface} from '../../interfaces/player-interface';
 import {ScorecardInterface} from '../../interfaces/scorecard-interface';
-import {DataService} from '../../data.service';
-import {UserDataService} from '../../user-data.service';
+import {DataService} from '../../services/data.service';
+import {UserDataService} from '../../services/user-data.service';
 import {ActivatedRoute} from '@angular/router';
 import {ScorecardComponent} from '../scorecard/scorecard.component';
 

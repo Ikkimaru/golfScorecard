@@ -2,9 +2,9 @@ import {Component, inject, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Router, RouterModule} from '@angular/router';
 import {PlayerInterface} from '../../interfaces/player-interface';
-import {DataService} from '../../data.service';
-import {UserDataService} from '../../user-data.service';
-import {ScorecardDataService} from '../../scorecard-data.service';
+import {DataService} from '../../services/data.service';
+import {UserDataService} from '../../services/user-data.service';
+import {ScorecardDataService} from '../../services/scorecard-data.service';
 import {NavBarComponent} from '../nav-bar/nav-bar.component';
 
 @Component({

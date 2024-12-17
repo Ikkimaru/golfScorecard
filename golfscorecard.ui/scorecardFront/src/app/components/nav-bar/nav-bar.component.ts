@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {Router, RouterModule} from '@angular/router';
-import {UserDataService} from '../../user-data.service';
+import {UserDataService} from '../../services/user-data.service';
 import {PlayerInterface} from '../../interfaces/player-interface';
 
 @Component({
