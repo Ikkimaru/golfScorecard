@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ScorecardInterface } from './interfaces/scorecard-interface';
+import { ScorecardInterface } from '../interfaces/scorecard-interface';
 
 @Injectable({
   providedIn: 'root'

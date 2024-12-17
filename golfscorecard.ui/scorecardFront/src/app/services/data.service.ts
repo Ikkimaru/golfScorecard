@@ -1,10 +1,10 @@
 // src/app/data.service.ts
 
 import {Injectable} from '@angular/core';
-import {HoleInterface} from './interfaces/holes-interface';
-import {GolfCourseInterface} from './interfaces/golfCourse-interface';
-import {ScorecardInterface} from './interfaces/scorecard-interface';
-import {PlayerInterface} from './interfaces/player-interface';
+import {HoleInterface} from '../interfaces/holes-interface';
+import {GolfCourseInterface} from '../interfaces/golfCourse-interface';
+import {ScorecardInterface} from '../interfaces/scorecard-interface';
+import {PlayerInterface} from '../interfaces/player-interface';
 
 @Injectable({
   providedIn: 'root'  // This service is provided at the root level
