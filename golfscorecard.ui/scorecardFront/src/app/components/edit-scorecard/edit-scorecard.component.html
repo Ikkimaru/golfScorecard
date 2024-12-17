@@ -1,1 +1,67 @@
-<p>edit-scorecard works!</p>
+<div class="scorecard-container">
+  <h1>Scorecard</h1>
+
+  <!-- Dropdown to select the course -->
+  <div class="course-selection">
+    <label for="courseName">Select Course:</label>
+    <select id="courseName" [(ngModel)]="selectedCourseId" (change)="onCourseChange($event)">
+      <option *ngFor="let course of courseList" [value]="course.id">{{ course.CourseName }}</option>
+    </select>
+  </div>
+
+  <!-- Show dropdown for 9 or 18 holes if the course has 18 holes -->
+  <div *ngIf="showHoleCountDropdown">
+    <label for="holeCount">Select Number of Holes:</label>
+    <select id="holeCount" [(ngModel)]="selectedHoleCount" (change)="onHoleCountChange()">
+      <option value="9">9 Holes</option>
+      <option value="18">18 Holes</option>
+    </select>
+  </div>
+
+  <!-- Scorecard details -->
+  <div *ngIf="scorecard; else loading">
+    <h2>Course: {{ scorecard.courseName }}</h2>
+    <h3>Date: {{ scorecard.GameDate | date: 'dd MMM yyyy (EEEE)' }}</h3>
+
+    <table class="scorecard-table">
+      <thead>
+      <tr>
+        <th>Hole</th>
+        <th *ngFor="let hole of holes; let i = index">{{ i + 1 }}</th>
+        <th>Total</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Par</td>
+        <td *ngFor="let hole of holes">{{ hole.Par }}</td>
+        <td>{{ calculateTotalPar() }}</td>
+      </tr>
+      <tr>
+        <td>Strokes</td>
+        <td *ngFor="let score of scorecard.scores; let i = index">
+          <input
+            type="number"
+            [(ngModel)]="scorecard.scores[i].Strokes"
+            min="0"
+            max="99"
+            class="score-input"
+            (ngModelChange)="calculateTotalScore()"
+          />
+        </td>
+        <td>{{ scorecard.TotalScore }}</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div class="total-score">
+      <strong>Total Score:</strong> {{ scorecard.TotalScore }}
+    </div>
+
+    <button (click)="saveScorecard()">Save Scorecard</button>
+  </div>
+
+  <ng-template #loading>
+    <p>Loading scorecard data...</p>
+  </ng-template>
+</div>

@@ -7,6 +7,7 @@ import {ProfileComponent} from './components/profile/player.component';
 import {LoginComponent} from './components/login/login.component';
 import { authGuard } from './auth.guard';
 import {GeneralComponent} from './components/general/general.component';
+import {EditScorecardComponent} from './components/edit-scorecard/edit-scorecard.component';
 
 const routeConfig: Routes = [
   { path: 'login', component: LoginComponent },
@@ -56,6 +57,12 @@ const routeConfig: Routes = [
     path: 'player',
     component: ProfileComponent,
     title: 'View Player',
+    canActivate: [authGuard]
+  },
+  {
+    path: 'addscore',
+    component: EditScorecardComponent,
+    title: 'Add Score',
     canActivate: [authGuard]
   },
 ];
