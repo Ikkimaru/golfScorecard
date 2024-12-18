@@ -5,6 +5,7 @@ import {HoleInterface} from '../interfaces/holes-interface';
 import {GolfCourseInterface} from '../interfaces/golfCourse-interface';
 import {ScorecardInterface} from '../interfaces/scorecard-interface';
 import {PlayerInterface} from '../interfaces/player-interface';
+import {TeeBoxInterface} from '../interfaces/teeBox-interface';
 
 @Injectable({
   providedIn: 'root'  // This service is provided at the root level
@@ -109,6 +110,25 @@ export class DataService {
     } catch (error) {
       console.error(`Error fetching hole with ID ${id}:`, error);
       return []; // Return undefined on error
+    }
+  }
+
+  async getTeeBoxByCourseId(id: number): Promise<TeeBoxInterface []> {
+    try {
+      const response = await fetch(`${this.url}teeboxes/golfCourse/${id}`);
+      const result = await response.json();
+
+      // Check if the response contains the 'data' field and return it
+      if (result.data && Array.isArray(result.data)) {
+        return result.data;
+      }
+
+      // Handle unexpected response format
+      console.error('Unexpected response format:', result);
+      return [];
+    } catch (error) {
+      console.error('Error fetching tee boxes:', error);
+      return [];
     }
   }
 

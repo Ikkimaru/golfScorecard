@@ -18,6 +18,15 @@
     </select>
   </div>
 
+  <!-- Show dropdown for teeboxes if the course has teeboxes -->
+  <div *ngIf="teeBoxList.length > 0">
+    <label for="teeBoxColor">Select Tee Box Color:</label>
+    <select id="teeBoxColor" [(ngModel)]="selectedTeeBox" (change)="onTeeBoxChange()">
+      <option *ngFor="let teeBox of teeBoxList" [ngValue]="teeBox">{{ teeBox.Color }}</option>
+    </select>
+  </div>
+
+
   <!-- Scorecard details -->
   <div *ngIf="scorecard; else loading">
     <h2>Course: {{ scorecard.courseName }}</h2>

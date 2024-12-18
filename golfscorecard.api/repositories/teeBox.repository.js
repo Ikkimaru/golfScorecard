@@ -30,6 +30,13 @@ class TeeBoxRepository extends BaseRepository {
     super.getById(id, callback);
   }
 
+  getTeeBoxByCourseId(id, callback) {
+    const query = `SELECT * FROM ${this.tableName} WHERE golfCourseID = ?`;
+    this.db.all(query, [id], (err, rows) => {
+      callback(err, rows);
+    });
+  }
+
   updateTeeBox(id, teeBox, callback) {
     const columns = ['golfCourseID', 'color', 'yardage', 'meters', 'courseRating', 'coursePar'];
     const data = [

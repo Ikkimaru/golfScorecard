@@ -5,6 +5,7 @@ import {DataService} from '../../services/data.service';
 import {ScorecardInterface} from '../../interfaces/scorecard-interface';
 import {GolfCourseInterface} from '../../interfaces/golfCourse-interface';
 import {HoleInterface} from '../../interfaces/holes-interface';
+import {TeeBoxInterface} from '../../interfaces/teeBox-interface';
 
 @Component({
   selector: 'app-edit-scorecard',
@@ -23,9 +24,11 @@ export class EditScorecardComponent implements OnInit {
   showHoleCountDropdown: boolean = false;
   selectedCourseId: number | null = null;
   selectedHoleCount: number = 18;
+  selectedTeeBox: string = '';
   selectedCourse: GolfCourseInterface | null = null;
   scorecard: ScorecardInterface | null = null;
   holes: HoleInterface[] = [];
+  teeBoxList: TeeBoxInterface[] = [];
 
   constructor(private readonly dataService: DataService) {}
 
@@ -36,11 +39,10 @@ export class EditScorecardComponent implements OnInit {
 
       if (this.selectedCourseId !== null && this.selectedCourseId !== undefined) {
         const selectedCourse = this.courseList.find(course => course.id === this.selectedCourseId);
-
         if (selectedCourse) {
           // Fetch holes based on the selected course
           this.holes = await this.dataService.getHolesByCourseId(this.selectedCourseId);
-
+          this.teeBoxList = await this.dataService.getTeeBoxByCourseId(this.selectedCourseId);
           // If the course has 18 holes, show the option to select either 9 or 18 holes
           if (this.holes.length === 18) {
             this.showHoleCountDropdown = true;
@@ -66,9 +68,17 @@ export class EditScorecardComponent implements OnInit {
     this.initializeScores();
   }
 
+  onTeeBoxChange() {
+    console.log('Selected Tee Box Color:', this.selectedTeeBox);
+    // Handle logic for the selected tee box
+    // Reinitialize the scores based on the selected tee box
+    this.initializeScores();
+  }
+
   initializeScores() {
     if (this.scorecard && this.holes && this.holes.length > 0) {
-      this.scorecard.scores = this.holes.map(hole => ({
+      // Initialize scores based on the number of holes selected
+      this.scorecard.scores = this.holes.slice(0, this.selectedHoleCount).map(hole => ({
         id: 0,
         ScorecardID: this.scorecard!.id,
         HoleID: hole.id,
@@ -76,8 +86,6 @@ export class EditScorecardComponent implements OnInit {
       }));
     }
   }
-
-
 
   async onCourseChange(event: Event) {
     const target = event.target as HTMLSelectElement;
@@ -87,13 +95,25 @@ export class EditScorecardComponent implements OnInit {
     if (selected) {
       this.selectedCourseId = courseId;
       this.selectedCourse = selected;
+      await this.loadTeeBoxes(courseId);
       this.initializeScorecard(selected);
 
       // Fetch holes data for the selected course
       this.holes = await this.dataService.getHolesByCourseId(courseId);
+
+      // Reinitialize the scorecard scores
+      this.initializeScores();
     }
   }
 
+  async loadTeeBoxes(courseId: number) {
+    try {
+      this.teeBoxList = await this.dataService.getTeeBoxByCourseId(courseId);
+    } catch (error) {
+      console.error('Error loading tee boxes:', error);
+      this.teeBoxList = [];
+    }
+  }
 
   initializeScorecard(course: GolfCourseInterface) {
     this.scorecard = {
@@ -118,6 +138,7 @@ export class EditScorecardComponent implements OnInit {
       }))
     };
   }
+
 
   calculateTotalPar(): number {
     return this.holes.reduce((total, hole) => total + hole.Par, 0);

@@ -58,6 +58,16 @@ class TeeBoxService {
     });
   }
 
+  static getTeeBoxByCourseId(id, callback) {
+    TeeBoxRepository.getTeeBoxByCourseId(id, (err, teeBox) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, teeBox);
+      }
+    });
+  }
+
   static updateTeeBox(id, teeBoxData, callback) {
     try {
       const teeBox = new TeeBox(

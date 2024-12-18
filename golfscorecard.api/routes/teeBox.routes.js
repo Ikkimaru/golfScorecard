@@ -17,7 +17,7 @@ router.post('/', (req, res) => {
 });
 
 // Get all tee boxes
-router.get('/', (req, res) => {
+router.get('/:id', (req, res) => {
   TeeBoxService.getAllTeeBoxes((err, teeBoxes) => {
     if (err) {
       sendResponse(res, 500, 'Failed to retrieve tee boxes', null, err.message);
@@ -34,6 +34,19 @@ router.get('/:id', (req, res) => {
       sendResponse(res, 500, 'Failed to retrieve tee box', null, err.message);
     } else if (!teeBox) {
       sendResponse(res, 404, `Tee box with ID ${req.params.id} not found`);
+    } else {
+      sendResponse(res, 200, 'Tee box retrieved successfully', teeBox);
+    }
+  });
+});
+
+// Get tee box by Course ID
+router.get('/golfCourse/:id', (req, res) => {
+  TeeBoxService.getTeeBoxByCourseId(req.params.id, (err, teeBox) => {
+    if (err) {
+      sendResponse(res, 500, 'Failed to retrieve tee box by Course', null, err.message);
+    } else if (!teeBox) {
+      sendResponse(res, 404, `Tee box with Course ID ${req.params.id} not found`);
     } else {
       sendResponse(res, 200, 'Tee box retrieved successfully', teeBox);
     }
