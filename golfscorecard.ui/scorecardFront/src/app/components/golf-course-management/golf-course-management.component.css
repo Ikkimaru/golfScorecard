@@ -1,0 +1,119 @@
+/* General container */
+.manager-container {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+/* Section styling */
+section {
+  margin-bottom: 30px;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* Form styling */
+input {
+  padding: 8px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Golf Courses List */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background-color: #f1f1f1;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+li button {
+  background-color: #dc3545;
+  padding: 5px 10px;
+}
+
+li button:hover {
+  background-color: #c82333;
+}
+
+/* Tee Box and Hole Sections */
+h2 {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+
+small {
+  font-size: 0.9em;
+  color: #888;
+}
+
+input[placeholder] {
+  color: #888;
+}
+
+input {
+  margin-top: 5px;
+}
+
+div {
+  margin-bottom: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .manager-container {
+    padding: 15px;
+  }
+
+  input, button {
+    width: 100%;
+  }
+
+  ul {
+    padding-left: 20px;
+  }
+}

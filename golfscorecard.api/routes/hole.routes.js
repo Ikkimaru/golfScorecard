@@ -46,7 +46,20 @@ router.get('/golfCourse/:id', (req, res) => {
     if (err) {
       sendResponse(res, 500, 'Failed to retrieve course hole', null, err.message);
     } else if (!hole) {
-      sendResponse(res, 404, `Hole with ID ${req.params.id} not found`);
+      sendResponse(res, 404, `Hole with Course ID ${req.params.id} not found`);
+    } else {
+      sendResponse(res, 200, 'Hole retrieved successfully', hole);
+    }
+  });
+});
+
+// Get hole by CourseId
+router.get('/teebox/:id', (req, res) => {
+  HoleService.getHoleByTeeboxId(req.params.id, (err, hole) => {
+    if (err) {
+      sendResponse(res, 500, 'Failed to retrieve teebox hole', null, err.message);
+    } else if (!hole) {
+      sendResponse(res, 404, `Hole with Teebox ID ${req.params.id} not found`);
     } else {
       sendResponse(res, 200, 'Hole retrieved successfully', hole);
     }

@@ -33,6 +33,16 @@ class HoleRepository extends BaseRepository {
     });
   }
 
+  getHoleByTeeboxId(courseId, callback) {
+    const query = `SELECT * FROM Hole WHERE golfCourseID = ? ORDER BY HoleNumber`;
+    db.all(query, [courseId], (err, rows) => {
+      if (err) {
+        return callback(err);
+      }
+      callback(null, rows);
+    });
+  }
+
   updateHole(id, hole, callback) {
     const columns = ['golfCourseID', 'teeBoxID', 'holeNumber', 'par', 'handicapStroke', 'yardage', 'meters'];
     const data = [hole.golfCourseID, hole.teeBoxID, hole.holeNumber, hole.par, hole.handicapStroke, hole.yardage, hole.meters];

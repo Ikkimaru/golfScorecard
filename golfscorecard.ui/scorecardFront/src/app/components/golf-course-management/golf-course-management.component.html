@@ -1,0 +1,72 @@
+<div class="manager-container">
+  <h1>Golf Course Management</h1>
+
+  <!-- Golf Courses Section -->
+  <section>
+    <h2>Golf Courses</h2>
+    <div>
+      <input [(ngModel)]="newCourse.CourseName" placeholder="Course Name"/>
+      <input [(ngModel)]="newCourse.Location" placeholder="Location"/>
+      <input [(ngModel)]="newCourse.TotalHoles" placeholder="Total Holes" type="number"/>
+      <button (click)="addCourse()">Add Course</button>
+    </div>
+
+    <ul>
+      <li (click)="selectCourse(course)" (keydown)="selectCourse(course, $event)" *ngFor="let course of golfCourses">
+        {{ course.CourseName }} ({{ course.Location }}) {{ course.TotalHoles }} - holes
+        <button (click)="deleteCourse(course)">Delete</button>
+      </li>
+    </ul>
+
+
+  </section>
+
+  <!-- Tee Boxes Section -->
+  <section *ngIf="selectedCourse">
+    <!-- Form to add a new Tee Box -->
+    <div>
+      <label for="color">Color</label>
+      <input [(ngModel)]="newTeeBox.Color" id="color" placeholder="Color"/>
+
+      <label for="yardage">Yardage</label>
+      <input [(ngModel)]="newTeeBox.Yardage" id="yardage" placeholder="Yardage" type="number"/>
+
+      <label for="meters">Meters</label>
+      <input [(ngModel)]="newTeeBox.Meters" id="meters" placeholder="Meters" type="number"/>
+
+      <label for="courseRating">Course Rating</label>
+      <input [(ngModel)]="newTeeBox.CourseRating" id="courseRating" placeholder="Course Rating" type="number"/>
+
+      <label for="coursePar">Course Par</label>
+      <input [(ngModel)]="newTeeBox.CoursePar" id="coursePar" placeholder="Course Par" type="number"/>
+
+      <button (click)="addTeeBox()">Add Tee Box</button>
+    </div>
+
+    <h2>Tee Boxes for {{ selectedCourse.CourseName }}</h2>
+    <ul>
+      <li (click)="selectTeeBox(teeBox)" (keydown)="selectTeeBox(teeBox, $event)" *ngFor="let teeBox of teeBoxes">
+        {{ teeBox.Color }} - {{ teeBox.Yardage }} yards / {{ teeBox.Meters }} meters
+        <button (click)="deleteTeeBox(teeBox)">Delete</button>
+      </li>
+    </ul>
+
+
+  </section>
+
+  <!-- Holes Section -->
+  <section *ngIf="selectedTeeBox">
+    <h2>Holes for {{ selectedTeeBox.Color }} Tee Box</h2>
+    <ul>
+      <li *ngFor="let hole of holes">
+        Hole {{ hole.HoleNumber }}: Par {{ hole.Par }}
+        <button (click)="deleteHole(hole)">Delete</button>
+      </li>
+    </ul>
+
+    <div>
+      <input [(ngModel)]="newHole.HoleNumber" placeholder="Hole Number"/>
+      <button (click)="addHole()">Add Hole</button>
+    </div>
+  </section>
+</div>

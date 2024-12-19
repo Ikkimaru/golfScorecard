@@ -8,6 +8,7 @@ import {LoginComponent} from './components/login/login.component';
 import { authGuard } from './auth.guard';
 import {GeneralComponent} from './components/general/general.component';
 import {EditScorecardComponent} from './components/edit-scorecard/edit-scorecard.component';
+import {GolfCourseManagementComponent} from './components/golf-course-management/golf-course-management.component';
 
 const routeConfig: Routes = [
   { path: 'login', component: LoginComponent },
@@ -63,6 +64,12 @@ const routeConfig: Routes = [
     path: 'addscore',
     component: EditScorecardComponent,
     title: 'Add Score',
+    canActivate: [authGuard]
+  },
+  {
+    path: 'courseManagement',
+    component: GolfCourseManagementComponent,
+    title: 'Course Management',
     canActivate: [authGuard]
   },
 ];
